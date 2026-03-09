@@ -1,0 +1,4169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1A535C">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="manifest.json">
+  <title>Terrain Reset - Wellness Assessment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --chlorophyll: #6F99AF;
+      --leaf-green: #A8B892;
+      --sage: #A8B892;
+      --sage-soft: #EEF2EA;
+      --slate-blue: #6F99AF;
+      --slate-blue-soft: #EAF2F6;
+      --neutral-line: #D8D8D8;
+      --root-vegetable: #D97236;
+      --gold-harvest: #E8B44F;
+      --berry-blue: #4A6FA5;
+      --soil-brown: #8B6F47;
+      --lavender-mist: #9B8FA8;
+      --charcoal: #333333;
+      --warm-gray: #6B6B6B;
+      --light-gray: #E8E8E8;
+      --pure-white: #FFFFFF;
+      --bg-light: #F6F7FB;
+    }
+
+    body {
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--pure-white);
+      color: var(--charcoal);
+      line-height: 1.5;
+    }
+
+    /* Header */
+    .header {
+      background: white;
+      border-bottom: 2px solid var(--light-gray);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--leaf-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+    }
+
+    .logo-text h1 {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-text p {
+      font-size: 11px;
+      color: var(--warm-gray);
+      margin-top: -2px;
+    }
+
+    /* Navigation */
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-tab {
+      padding: 10px 16px;
+      border: 2px solid var(--light-gray);
+      border-radius: 10px;
+      background: white;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--warm-gray);
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      font-family: inherit;
+    }
+
+    .nav-tab:hover {
+      background: var(--bg-light);
+    }
+
+    .nav-tab.active {
+      background: var(--leaf-green);
+      color: white;
+      box-shadow: 0 4px 12px rgba(168, 184, 146, 0.28);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 16px;
+    }
+
+    /* Page Views */
+    .page-view {
+      display: none;
+    }
+
+    .page-view.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Quiz Intro */
+    .quiz-intro {
+      background: var(--sage-soft);
+      border: 2px solid rgba(111, 153, 175, 0.28);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    .quiz-intro h2 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #565656;
+    }
+
+    .quiz-intro p {
+      font-size: 16px;
+      color: var(--warm-gray);
+      margin-bottom: 20px;
+    }
+
+    .instructions {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .instructions h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--chlorophyll);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .instructions ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .instructions li {
+      padding: 8px 0;
+      color: var(--charcoal);
+    }
+
+    .instructions strong {
+      color: var(--chlorophyll);
+    }
+
+    /* Progress Bar */
+    .progress-section {
+      margin-bottom: 32px;
+    }
+
+    .progress-icon-rail-wrap {
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .progress-header {
+      display: none;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .progress-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .progress-bar-bg {
+      display: none;
+      height: 8px;
+      background: var(--light-gray);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--leaf-green);
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    /* Section Badge */
+    .section-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      margin-bottom: 18px;
+      font-weight: 700;
+      color: var(--chlorophyll);
+    }
+
+    .section-badge-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      line-height: 1.05;
+    }
+
+    .section-badge-text::before {
+      content: 'FOCUS AREA';
+      font-size: 10px;
+      letter-spacing: 1.2px;
+      font-weight: 800;
+      color: #8E8E8E;
+    }
+
+    .section-badge-name {
+      font-weight: 800;
+      font-size: 28px;
+      color: #4C4C4C;
+    }
+
+    .section-badge-descriptor {
+      font-size: 16px;
+      color: #777777;
+      font-weight: 700;
+    }
+
+    #section-emoji {
+      font-size: 34px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      transform: translateY(2px);
+    }
+
+    #timeframe-note {
+      margin-top: 8px;
+      margin-bottom: 22px;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--root-vegetable);
+      letter-spacing: 0.2px;
+    }
+
+    /* Question Card */
+    .question-card {
+      background: white;
+      border: 1px solid var(--neutral-line);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      transition: all 0.3s;
+    }
+
+    .question-card:hover {
+      border-color: var(--sage);
+    }
+
+    .question-card.answered {
+      border-color: rgba(111, 153, 175, 0.8);
+      background: var(--slate-blue-soft);
+    }
+
+    .question-header {
+      display: flex;
+      gap: 12px;
+      align-items: start;
+      margin-bottom: 10px;
+    }
+
+    .question-number {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--sage);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .question-card.answered .question-number {
+      background: var(--slate-blue);
+    }
+
+    .question-text {
+      flex: 1;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--charcoal);
+      line-height: 1.45;
+    }
+
+    .answer-options {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .answer-btn {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid var(--neutral-line);
+      border-radius: 12px;
+      background: white;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--warm-gray);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .answer-btn:hover {
+      border-color: var(--sage);
+      background: var(--sage-soft);
+    }
+
+    .answer-btn.selected {
+      background: var(--slate-blue);
+      color: white;
+      border-color: var(--slate-blue);
+      transform: none;
+      box-shadow: 0 4px 10px rgba(111, 153, 175, 0.25);
+    }
+
+    .answer-btn.previous {
+      background: #F5F6F7;
+      color: var(--warm-gray);
+      border-color: #D9DDDF;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .progress-meta {
+      display: none;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--warm-gray);
+    }
+
+    .form-card {
+      background: white;
+      border: 2px solid var(--light-gray);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 24px;
+    }
+
+    .form-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: var(--chlorophyll);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .form-field {
+      flex: 1;
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-input {
+      padding: 12px 14px;
+      border: 2px solid var(--light-gray);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--leaf-green);
+      box-shadow: 0 0 0 3px rgba(111, 153, 175, 0.18);
+    }
+
+    .option-btn {
+      border: 2px solid var(--light-gray);
+      border-radius: 12px;
+      background: white;
+      padding: 12px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      color: var(--warm-gray);
+    }
+
+    .option-btn.active {
+      background: var(--slate-blue);
+      color: white;
+      border-color: var(--slate-blue);
+      box-shadow: 0 4px 10px rgba(111, 153, 175, 0.24);
+    }
+
+    .note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--warm-gray);
+    }
+
+    .safety-card {
+      background: #FFF6F0;
+      border: 2px solid #F2C4AA;
+    }
+
+    .safety-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .safety-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--charcoal);
+    }
+
+    .safety-stop {
+      margin-top: 12px;
+      padding: 12px;
+      background: #FFE9DE;
+      border: 2px solid #F2C4AA;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #7A3E1F;
+      display: none;
+    }
+
+    .safety-clear {
+      margin-top: 8px;
+      font-size: 12px;
+      text-decoration: underline;
+      cursor: pointer;
+      color: #7A3E1F;
+      background: none;
+      border: none;
+      font-family: inherit;
+      padding: 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(111, 153, 175, 0.12);
+      color: var(--chlorophyll);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .comparison-card {
+      background: white;
+      border: 2px dashed var(--light-gray);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .mixed-card {
+      background: rgba(232, 180, 79, 0.12);
+      border: 3px solid var(--gold-harvest);
+      border-radius: 18px;
+      padding: 24px;
+      margin-top: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 10px 24px rgba(216, 151, 54, 0.15);
+    }
+
+    .mixed-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--soil-brown);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mixed-subhead {
+      font-size: 14px;
+      color: var(--charcoal);
+      margin-bottom: 16px;
+    }
+
+    .mixed-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #6A9BB8;
+      border: 2px solid #6A9BB8;
+      color: #FFFFFF;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .mixed-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+
+    .score-label-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--warm-gray);
+    }
+
+    .score-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--light-gray);
+      display: inline-block;
+    }
+
+    .final-checks-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .final-check-group {
+      background: white;
+      border: 2px solid var(--light-gray);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .modifier-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .flag-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .flag-badge {
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(111, 153, 175, 0.10);
+      border: 2px solid rgba(111, 153, 175, 0.28);
+      font-size: 12px;
+      color: var(--charcoal);
+      max-width: 100%;
+    }
+    .persist-bar {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: white;
+      border: 2px solid var(--light-gray);
+      border-radius: 14px;
+      padding: 12px 16px;
+      margin: 0 0 18px;
+      font-size: 12px;
+      color: var(--warm-gray);
+      flex-wrap: wrap;
+    }
+
+    .persist-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    #persist-text {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: baseline;
+    }
+
+    .persist-primary-line {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--root-vegetable);
+    }
+
+    .persist-secondary-line {
+      font-size: 11px;
+      color: #8F8F8F;
+    }
+
+    .download-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .setup-instructions {
+      background: white;
+      border: 2px solid var(--light-gray);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 24px;
+    }
+
+    .setup-instructions pre {
+      background: #F7F7F7;
+      padding: 16px;
+      border-radius: 12px;
+      overflow-x: auto;
+      font-size: 12px;
+    }
+
+    /* Navigation Buttons */
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 2px solid var(--light-gray);
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--charcoal);
+      border: 2px solid var(--light-gray);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--bg-light);
+    }
+
+    .btn-primary {
+      background: var(--leaf-green);
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      box-shadow: 0 4px 12px rgba(168, 184, 146, 0.28);
+      transform: translateY(-2px);
+    }
+
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* Section Indicators */
+    .section-dots {
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: 100%;
+      overflow: visible;
+      padding: 8px 0 12px;
+    }
+
+    .section-dot {
+      position: relative;
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+      opacity: 0.9;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .section-dot::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: calc(50% + 24px);
+      width: calc(100% - 48px);
+      height: 4px;
+      background: #DADADA;
+      z-index: 0;
+    }
+
+    .section-dot:last-child::after {
+      display: none;
+    }
+
+    .section-dot-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid #D4D4D4;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      line-height: 1;
+      transition: all 0.2s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-dot-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--warm-gray);
+      text-align: center;
+      line-height: 1.1;
+      letter-spacing: 0.2px;
+      max-width: 96px;
+      padding: 0 4px;
+    }
+
+    .section-dot.active {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    .section-dot.active .section-dot-circle {
+      border-color: var(--step-active-border, #D6D0CA);
+      background: var(--step-active-bg, #EAE4DD);
+      color: #FFFFFF;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .section-dot.active .section-dot-label {
+      color: #4A4A4A;
+    }
+
+    .section-dot.completed .section-dot-circle {
+      border-color: var(--step-completed-border, #E1DDD8);
+      background: var(--step-completed-bg, #F2EFEA);
+      color: #261C15;
+    }
+
+    .section-dot.completed .section-dot-label {
+      color: #6B6B6B;
+    }
+
+    .carb-lane-card {
+      background: var(--bg-light);
+      border-radius: 12px;
+      padding: 16px;
+      border: 2px solid transparent;
+    }
+
+    .carb-lane-card.active {
+      background: rgba(106, 155, 184, 0.12);
+      border-color: #6A9BB8;
+      box-shadow: 0 8px 20px rgba(106, 155, 184, 0.14);
+    }
+
+    .carb-lane-card.active .carb-lane-title {
+      color: #1F4F72;
+    }
+
+    .carb-lane-chip {
+      display: none;
+      margin-left: 8px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #6A9BB8;
+      color: #FFFFFF;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      vertical-align: middle;
+    }
+
+    .carb-lane-card.active .carb-lane-chip {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .carb-lane-guardrail {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 2px solid rgba(165, 156, 148, 0.75);
+      background: rgba(165, 156, 148, 0.10);
+      display: none;
+    }
+
+    .carb-lane-guardrail h4 {
+      font-size: 14px;
+      font-weight: 800;
+      margin: 0 0 6px;
+      color: var(--soil-brown);
+    }
+
+    .carb-lane-guardrail p {
+      font-size: 12px;
+      color: var(--charcoal);
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    /* Results Page */
+    .results-hero {
+      text-align: center;
+      padding: 48px 32px;
+      background: var(--sage-soft);
+      border: 2px solid rgba(111, 153, 175, 0.28);
+      border-radius: 20px;
+      margin-bottom: 32px;
+    }
+
+    .results-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: var(--leaf-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+
+    .results-hero h2 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .results-hero p {
+      font-size: 18px;
+      color: var(--warm-gray);
+    }
+
+    .focus-card {
+      background: white;
+      border: 2px solid var(--chlorophyll);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .focus-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .focus-card-header h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--chlorophyll);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .focus-card h4 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 20px 0 12px;
+    }
+
+    .focus-intro-line {
+      color: var(--warm-gray);
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .plan-line-grid {
+      display: grid;
+      gap: 8px;
+      margin: 0 0 14px;
+      font-size: 14px;
+      color: var(--charcoal);
+    }
+
+    .plan-line-note {
+      font-size: 12px;
+      color: var(--warm-gray);
+      margin-top: -2px;
+    }
+
+    .today-box {
+      background: white;
+      border: 2px solid var(--light-gray);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+
+    .today-box h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: var(--chlorophyll);
+    }
+
+    .today-box ul {
+      margin: 0 0 0 18px;
+      color: var(--charcoal);
+      font-size: 14px;
+    }
+
+    .support-section {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .score-display {
+      background: var(--slate-blue-soft);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 24px;
+    }
+
+    .mini-legend-strip {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 2px solid var(--light-gray);
+      background: #FFFFFF;
+      font-size: 14px;
+      color: #261C15;
+      line-height: 1.5;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .mini-legend-strip strong {
+      color: #261C15;
+      font-weight: 800;
+    }
+
+    .symbol-key-card {
+      background: #FFFFFF;
+      border: 2px solid var(--light-gray);
+    }
+
+    .symbol-key-title {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #261C15;
+    }
+
+    .symbol-key-sub {
+      font-size: 13px;
+      color: var(--warm-gray);
+      margin-bottom: 18px;
+    }
+
+    .symbol-key-row {
+      border: 2px solid var(--light-gray);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      background: #FFFFFF;
+    }
+
+    .symbol-key-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .symbol-key-row h4 {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--chlorophyll);
+      margin-bottom: 10px;
+    }
+
+    .symbol-key-line {
+      font-size: 14px;
+      color: #261C15;
+      margin-bottom: 6px;
+    }
+
+    .symbol-key-line:last-child {
+      margin-bottom: 0;
+    }
+
+    .symbol-key-muted {
+      font-size: 12px;
+      color: var(--warm-gray);
+    }
+
+    .symbol-key-lane-swatches {
+      display: flex;
+      gap: 8px;
+      margin: 8px 0;
+      flex-wrap: wrap;
+    }
+
+    .symbol-key-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .lane-swatch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: #FFFFFF;
+      font-size: 12px;
+      color: #261C15;
+    }
+
+    .lane-swatch-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .tweak-wash-note {
+      background: rgba(165, 156, 148, 0.16);
+      border: 2px solid rgba(165, 156, 148, 0.55);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-top: 8px;
+    }
+
+    .score-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .score-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--warm-gray);
+    }
+
+    .score-value {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--chlorophyll);
+    }
+
+    .area-breakdown {
+      background: white;
+      border: 2px solid var(--light-gray);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .area-breakdown h3 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    #all-areas {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .area-item {
+      padding: 26px 22px 20px;
+      border-radius: 12px;
+      background: white;
+      border: 2px solid var(--light-gray);
+      margin-bottom: 0;
+    }
+
+    .area-item.primary {
+      background: var(--sage-soft);
+      border-color: var(--chlorophyll);
+    }
+
+    .area-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .area-emoji {
+      font-size: 20px;
+    }
+
+    .area-info {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .area-name {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .area-descriptor {
+      font-size: 12px;
+      color: var(--warm-gray);
+      margin: 6px 0 10px 32px;
+    }
+
+    .area-score {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .area-progress {
+      height: 8px;
+      background: var(--light-gray);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .area-progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 1s ease;
+    }
+
+    .next-steps {
+      background: var(--leaf-green);
+      border-radius: 20px;
+      padding: 40px 32px;
+      color: white;
+    }
+
+    .next-steps h3 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step-text {
+      font-size: 15px;
+      opacity: 0.95;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .nav-tabs {
+        width: 100%;
+        overflow-x: auto;
+      }
+
+      .nav-tab {
+        white-space: nowrap;
+      }
+
+      .section-dots {
+        justify-content: flex-start;
+        overflow-x: auto;
+        gap: 10px;
+        width: auto;
+        padding: 4px 2px 10px;
+      }
+
+      .section-dot {
+        flex: 0 0 auto;
+        min-width: 60px;
+      }
+
+      .section-dot::after {
+        display: none;
+      }
+
+      .section-dot-circle {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+      }
+
+      .section-dot-label {
+        font-size: 10px;
+        max-width: 56px;
+      }
+
+      .container {
+        padding: 20px 12px;
+      }
+
+      .answer-options {
+        flex-direction: column;
+      }
+
+      .answer-btn {
+        padding: 12px 14px;
+        font-size: 15px;
+      }
+
+      .section-badge {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 14px;
+      }
+
+      .section-badge-name {
+        font-size: 24px;
+      }
+
+      .section-badge-descriptor {
+        font-size: 14px;
+      }
+
+      #section-emoji {
+        font-size: 30px;
+      }
+
+      #timeframe-note {
+        margin-bottom: 18px;
+      }
+
+      .quiz-intro h2 {
+        font-size: 24px;
+      }
+
+      .results-hero h2 {
+        font-size: 28px;
+      }
+
+      .mini-legend-strip {
+        font-size: 11px;
+      }
+
+      .symbol-key-title {
+        font-size: 20px;
+      }
+
+      .symbol-key-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #all-areas {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .header,
+      .nav-tabs,
+      #intro-page,
+      #quiz-page,
+      .next-steps,
+      .form-card,
+      .comparison-card .btn,
+      .download-buttons,
+      .section-dots,
+      .quiz-nav,
+      .progress-section {
+        display: none !important;
+      }
+
+      #results-page {
+        display: block !important;
+      }
+
+      .results-hero,
+      .focus-card,
+      .area-breakdown {
+        break-inside: avoid;
+      }
+
+      .symbol-key-card {
+        border-color: #DADADA;
+      }
+    }
+
+    /* Loading State */
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid var(--light-gray);
+      border-top-color: var(--chlorophyll);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <div class="logo-icon">🌿</div>
+        <div class="logo-text">
+          <h1>TERRAIN RESET</h1>
+          <p>Wellness Assessment</p>
+        </div>
+      </div>
+      <nav class="nav-tabs">
+        <button class="nav-tab active" onclick="showPage('intro')">🏠 Start</button>
+        <button class="nav-tab" onclick="showPage('quiz')" id="quiz-tab">📋 Assessment</button>
+        <button class="nav-tab" onclick="showPage('results')" id="results-tab" style="display: none;">📊 Results</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+    <!-- Intro Page -->
+    <div id="intro-page" class="page-view active">
+      <div class="quiz-intro">
+        <h2>Find Your Starting Point</h2>
+        <p>This questionnaire will help identify your primary wellness focus area and create a personalized plan for your 14-day journey.</p>
+        
+        <div class="instructions">
+          <h3>📋 How to Answer</h3>
+          <ul>
+            <li>Answer options adapt to the question type (frequency, severity, or intensity).</li>
+            <li><strong>0</strong> always means lowest or none.</li>
+            <li><strong>1</strong> means moderate or sometimes.</li>
+            <li><strong>2</strong> means highest or most often.</li>
+          </ul>
+        </div>
+
+      <div class="form-card safety-card" id="safety-card">
+        <h3>Quick Safety Check</h3>
+        <p style="color: var(--warm-gray); font-size: 14px; margin-top: 4px;">
+          This reset is designed for everyday symptoms and patterns, not urgent or complex medical situations.
+        </p>
+        <div class="safety-list">
+          <label class="safety-item">
+            <input type="checkbox" id="safety-blood" onchange="setSafetyAnswer('blood', this.checked)">
+            <span>Blood in stool (bright red) or black/tarry stools</span>
+          </label>
+          <label class="safety-item">
+            <input type="checkbox" id="safety-weight" onchange="setSafetyAnswer('weightLoss', this.checked)">
+            <span>Unintentional rapid weight loss recently</span>
+          </label>
+          <label class="safety-item">
+            <input type="checkbox" id="safety-ed" onchange="setSafetyAnswer('edRisk', this.checked)">
+            <span>An active eating disorder, or food restriction feels unsafe right now</span>
+          </label>
+          <label class="safety-item">
+            <input type="checkbox" id="safety-none" onchange="setSafetyAnswer('none', this.checked)">
+            <span>None of the above</span>
+          </label>
+        </div>
+        <div class="safety-stop" id="safety-stop-message">
+          <strong>Pause here.</strong><br>
+          Based on what you selected, this quiz and protocol are not the right starting point. Please reach out to a qualified medical provider before making dietary changes.
+          <button class="safety-clear" type="button" onclick="clearSafetyAnswers()">Clear selections and continue</button>
+        </div>
+      </div>
+
+      <div class="form-card" id="sex-card">
+        <h3>Before You Begin</h3>
+        <p style="color: var(--warm-gray); font-size: 14px; margin-top: 4px;">
+          This keeps certain questions relevant and personalized.
+        </p>
+        <div class="form-row">
+          <button class="option-btn" id="sex-female" onclick="setSexStatus('female')">Female</button>
+          <button class="option-btn" id="sex-male" onclick="setSexStatus('male')">Male</button>
+        </div>
+      </div>
+
+      <div class="form-card" id="contact-card">
+        <h3>Contact (for your records)</h3>
+        <p style="color: var(--warm-gray); font-size: 14px; margin-top: 4px;">
+          Optional, but helpful if you want to track results over time.
+        </p>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="profile-name" style="font-size: 12px; font-weight: 700;">Name</label>
+            <input class="form-input" id="profile-name" type="text" placeholder="Your name">
+          </div>
+          <div class="form-field">
+            <label for="profile-email" style="font-size: 12px; font-weight: 700;">Email</label>
+            <input class="form-input" id="profile-email" type="email" placeholder="you@email.com">
+          </div>
+        </div>
+      </div>
+
+        <div class="form-card" id="cycle-card">
+          <h3>Cycle Check</h3>
+          <p style="color: var(--warm-gray); font-size: 14px; margin-top: 4px;">
+            Some hormone questions are different based on cycle status.
+          </p>
+          <div class="form-row">
+            <button class="option-btn" id="cycle-yes" onclick="setCycleStatus('cycle')">I have a menstrual cycle</button>
+            <button class="option-btn" id="cycle-no" onclick="setCycleStatus('no-cycle')">I do not have a menstrual cycle</button>
+          </div>
+          <div class="note" id="cycle-note">This will personalize a few hormone-related questions.</div>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <button class="btn btn-primary" id="start-btn" onclick="startQuiz()" disabled>Begin Assessment →</button>
+          <div class="note" id="start-note">Select your sex to begin.</div>
+        </div>
+      </div>
+
+      <div style="background: white; border: 2px solid var(--light-gray); border-radius: 16px; padding: 24px;">
+        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">What You'll Discover</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px;">
+          <div style="padding: 16px; border-radius: 12px; background: var(--bg-light);">
+            <div style="font-size: 24px; margin-bottom: 6px;">🌿</div>
+            <div style="font-size: 14px; font-weight: 800;">Belly</div>
+            <div style="font-size: 12px; color: var(--warm-gray); margin-top: 4px;">Digestion & Comfort</div>
+          </div>
+          <div style="padding: 16px; border-radius: 12px; background: var(--bg-light);">
+            <div style="font-size: 24px; margin-bottom: 6px;">🍯</div>
+            <div style="font-size: 14px; font-weight: 800;">Sugar</div>
+            <div style="font-size: 12px; color: var(--warm-gray); margin-top: 4px;">Blood Sugar Stability</div>
+          </div>
+          <div style="padding: 16px; border-radius: 12px; background: var(--bg-light);">
+            <div style="font-size: 24px; margin-bottom: 6px;">🌙</div>
+            <div style="font-size: 14px; font-weight: 800;">Sleep</div>
+            <div style="font-size: 12px; color: var(--warm-gray); margin-top: 4px;">Sleep & Energy</div>
+          </div>
+          <div style="padding: 16px; border-radius: 12px; background: var(--bg-light);">
+            <div style="font-size: 24px; margin-bottom: 6px;">⚡</div>
+            <div style="font-size: 14px; font-weight: 800;">Stress</div>
+            <div style="font-size: 12px; color: var(--warm-gray); margin-top: 4px;">Stress & Nervous System</div>
+          </div>
+          <div style="padding: 16px; border-radius: 12px; background: var(--bg-light);">
+            <div style="font-size: 24px; margin-bottom: 6px;">🔥</div>
+            <div style="font-size: 14px; font-weight: 800;">Metabolism</div>
+            <div style="font-size: 12px; color: var(--warm-gray); margin-top: 4px;">Metabolism & Energy</div>
+          </div>
+          <div style="padding: 16px; border-radius: 12px; background: var(--bg-light);">
+            <div style="font-size: 24px; margin-bottom: 6px;">🌸</div>
+            <div style="font-size: 14px; font-weight: 800;">Hormones</div>
+            <div style="font-size: 12px; color: var(--warm-gray); margin-top: 4px;">Hormones & Mood</div>
+          </div>
+          <div style="padding: 16px; border-radius: 12px; background: var(--bg-light);">
+            <div style="font-size: 24px; margin-bottom: 6px;">💧</div>
+            <div style="font-size: 14px; font-weight: 800;">Drainage</div>
+            <div style="font-size: 12px; color: var(--warm-gray); margin-top: 4px;">Elimination & Detox</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Quiz Page -->
+    <div id="quiz-page" class="page-view">
+      <div class="progress-section">
+        <div class="progress-header">
+          <span class="progress-text">Assessment Progress <span id="current-section" style="display:none;">1</span></span>
+          <span class="progress-text"><span id="progress-percent">0</span>%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+        <div class="progress-meta">
+          <span>Answered <strong id="answered-count">0</strong> of <strong id="total-questions">0</strong></span>
+          <span id="section-status">Section incomplete</span>
+        </div>
+        <div class="progress-icon-rail-wrap">
+          <div class="section-dots" id="section-dots"></div>
+        </div>
+      </div>
+
+      <div class="section-badge" id="section-badge">
+        <span id="section-emoji">🌿</span>
+        <span class="section-badge-text">
+          <span class="section-badge-name" id="section-name">Belly</span>
+          <span class="section-badge-descriptor" id="section-descriptor">Digestion &amp; Comfort</span>
+        </span>
+      </div>
+      <div class="note" id="timeframe-note">Answer based on the last 14 days.</div>
+
+      <div class="persist-bar" id="persist-bar">
+        <span id="persist-text">Saved answers found.</span>
+        <div class="persist-actions">
+          <button class="btn btn-secondary" id="persist-restore-btn" type="button" onclick="restoreSavedProgress()">Restore</button>
+          <button class="btn btn-secondary" id="persist-fresh-btn" type="button" onclick="startFresh()">Start Fresh</button>
+          <button class="btn btn-secondary" id="persist-clear-btn" type="button" onclick="clearSavedProgress()">Clear Saved</button>
+        </div>
+      </div>
+
+      <div id="questions-container"></div>
+
+      <div class="quiz-nav">
+        <button class="btn btn-secondary" id="prev-btn" onclick="previousSection()" disabled>← Previous</button>
+        <button class="btn btn-primary" id="next-btn" onclick="nextSection()">Next →</button>
+      </div>
+    </div>
+
+    <div id="final-checks-page" class="page-view">
+      <div class="quiz-intro">
+        <h2>Final Checks (to personalize your starting rules)</h2>
+        <p>These are not diagnoses. They are simple guardrails that prevent common "I did everything right and still felt worse" scenarios.</p>
+      </div>
+
+      <div class="final-checks-grid">
+        <div class="final-check-group">
+          <h3 style="font-size: 16px; color: var(--chlorophyll); margin-bottom: 8px;">Autoimmune (clinician diagnosed or strongly suspected)</h3>
+          <p style="font-size: 14px; color: var(--warm-gray);">If autoimmune is in the picture, we use a longer runway (Deep Reset, 30 days) to reduce variables and keep feedback clearer.</p>
+          <div class="modifier-row" id="modifier-autoimmune"></div>
+        </div>
+
+        <div class="final-check-group">
+          <h3 style="font-size: 16px; color: var(--chlorophyll); margin-bottom: 8px;">Nightshades check (joint pain)</h3>
+          <p style="font-size: 14px; color: var(--warm-gray);">Do you experience joint pain, morning stiffness, or arthritis-type symptoms that affect your daily life?</p>
+          <div class="modifier-row" id="modifier-pain"></div>
+        </div>
+
+        <div class="final-check-group">
+          <h3 style="font-size: 16px; color: var(--chlorophyll); margin-bottom: 8px;">SIBO / Low-FODMAP</h3>
+          <p style="font-size: 14px; color: var(--warm-gray);">Do foods like garlic, onion, lots of salad, or high-fiber "healthy bowls" make your bloating noticeably worse?</p>
+          <div class="modifier-row" id="modifier-sibo"></div>
+        </div>
+
+        <div class="final-check-group">
+          <h3 style="font-size: 16px; color: var(--chlorophyll); margin-bottom: 8px;">Histamine / Fresh Only</h3>
+          <p style="font-size: 14px; color: var(--warm-gray);">Do leftovers, aged foods (cheese, cured meats), wine, or fermented foods trigger symptoms quickly, such as headache, flushing, itching, anxiety, or a racing heart?</p>
+          <div class="modifier-row" id="modifier-histamine"></div>
+        </div>
+
+        <div class="final-check-group">
+          <h3 style="font-size: 16px; color: var(--chlorophyll); margin-bottom: 8px;">Pace First (nervous system)</h3>
+          <p style="font-size: 14px; color: var(--warm-gray);">This helps us keep Phase 1 intensity appropriate for your current recovery capacity.</p>
+          <p style="font-size: 12px; color: var(--warm-gray); margin-bottom: 8px;">0 = Quick next-day recovery | 1 = Takes 1-2 days | 2 = Slow/several-day recovery</p>
+          <div id="modifier-pace-recovery"></div>
+        </div>
+
+        <div class="final-check-group">
+          <h3 style="font-size: 16px; color: var(--chlorophyll); margin-bottom: 8px;">Bile and fat handling (quick check)</h3>
+          <p style="font-size: 12px; color: var(--warm-gray); margin-bottom: 8px;">0 = No | 1 = Sometimes | 2 = Often</p>
+          <div id="modifier-bile-1"></div>
+          <div id="modifier-bile-2" style="margin-top: 12px;"></div>
+          <div id="modifier-bile-3" style="margin-top: 12px;"></div>
+        </div>
+
+        <div class="final-check-group">
+          <h3 style="font-size: 16px; color: var(--chlorophyll); margin-bottom: 8px;">Environment sensitivity (optional)</h3>
+          <p style="font-size: 14px; color: var(--warm-gray);">Do you live or work in a damp or water-damaged building (musty smell counts), or do symptoms noticeably improve when you're away for 2+ days?</p>
+          <div class="modifier-row" id="modifier-environment"></div>
+          <p class="note">This does not change your food plan. It helps explain why progress can stall even with good compliance.</p>
+        </div>
+      </div>
+
+      <div class="quiz-nav">
+        <button class="btn btn-secondary" type="button" onclick="backToLastSection()">← Back</button>
+        <button class="btn btn-primary" type="button" onclick="finalizeFromChecks()">See Results →</button>
+      </div>
+    </div>
+
+    <!-- Results Page -->
+    <div id="results-page" class="page-view">
+      <div class="results-hero">
+        <div class="results-icon">✓</div>
+        <h2>Start Here</h2>
+        <p>Your next 14 days, simplified.</p>
+        <div style="margin-top: 12px;">
+          <span class="pill" id="answers-changed-badge" style="display: none;">You updated 0 of 0 answers</span>
+        </div>
+      </div>
+
+      <div class="focus-card">
+        <div class="focus-card-header">
+          <span style="font-size: 32px;" id="primary-emoji">🌙</span>
+          <h3 id="focus-card-heading">Your Starting Point</h3>
+        </div>
+        <p class="focus-intro-line" id="focus-intro-line">
+          This is your Focus Area for Phase 1. Keep it simple and let the feedback get clearer.
+        </p>
+        <div class="plan-line-grid">
+          <div id="plan-reset-line"><strong>Reset length:</strong> ↺ Reset (14 days)</div>
+          <div id="plan-carb-line"><strong>Carb Lane:</strong> ◇ Balanced</div>
+          <div id="plan-focus-line"><strong>Focus:</strong> Sleep</div>
+          <div id="focus-explainer-line" class="plan-line-note" style="display:none;"></div>
+          <div id="plan-tweaks-line"><strong>Tweaks:</strong> None</div>
+          <div id="plan-next-step-line"><strong>Next step:</strong> Start Day 1 (Light Bookends)</div>
+          <div class="plan-line-note">Week 1 adds the 8 Daily Foundations one by one. Once you add one, keep it.</div>
+        </div>
+        <div class="download-buttons" style="margin-top: 8px;">
+          <button class="btn btn-primary" type="button" onclick="scrollToCarbLanes()">View Carb Lane details</button>
+          <button class="btn btn-secondary" type="button" onclick="setRecheckReminder()">Set a re-check reminder (Day 14)</button>
+        </div>
+      </div>
+
+      <div class="today-box">
+        <h3>Today</h3>
+        <ul>
+          <li>Start Day 1 today</li>
+          <li>Keep meals simple and repeatable</li>
+          <li>Do not test foods or make big changes in Phase 1</li>
+        </ul>
+      </div>
+
+      <div class="support-section" id="support-section">
+        <div class="flag-row" id="flag-row"></div>
+      </div>
+
+      <div class="area-breakdown">
+        <h3>Complete Focus Area Map</h3>
+        <div id="all-areas"></div>
+      </div>
+
+      <div class="area-breakdown" id="qa-summary-card">
+        <h3>Q&A Summary</h3>
+        <p style="font-size: 13px; color: var(--warm-gray); margin-bottom: 12px;">
+          A clean snapshot of each question and your selected answer.
+        </p>
+        <details id="qa-summary-details">
+          <summary style="cursor: pointer; font-weight: 700; color: var(--charcoal);">Show Q&A Summary</summary>
+          <div id="qa-summary-list" style="display: grid; gap: 10px; margin-top: 12px;"></div>
+          <div class="download-buttons" style="margin-top: 12px;">
+            <button class="btn btn-secondary" type="button" onclick="copyQASummary()">Copy Q&A Summary</button>
+            <button class="btn btn-primary" type="button" onclick="copyProtocolSummary()">Copy Your Starting Point</button>
+          </div>
+        </details>
+      </div>
+
+      <div class="area-breakdown" id="carb-lanes-section">
+        <h3>Carb Lanes (Starch Dial)</h3>
+        <p style="font-size: 13px; color: var(--warm-gray); margin-bottom: 16px;">
+          Your Carb Lane is not a diet identity. It is a starting setting for your current terrain.
+        </p>
+        <div style="display: grid; gap: 12px;">
+          <div class="carb-lane-card" id="carb-lane-lower">
+            <strong class="carb-lane-title">▽ Lower <span class="carb-lane-chip">Your Lane</span></strong>
+            <p style="font-size: 13px; color: var(--charcoal); margin: 8px 0;">
+              Carbs tend to trigger cravings, crashes, mood dips, or disrupted sleep.
+            </p>
+            <p style="font-size: 12px; color: var(--warm-gray); margin: 0;">
+              Protein and cooked veg are the base. Carbs are minimal and always paired with protein and fat.
+            </p>
+          </div>
+          <div class="carb-lane-card" id="carb-lane-balanced">
+            <strong class="carb-lane-title">◇ Balanced <span class="carb-lane-chip">Your Lane</span></strong>
+            <p style="font-size: 13px; color: var(--charcoal); margin: 8px 0;">
+              You do best with a moderate amount of carbs, structured with meals.
+            </p>
+            <p style="font-size: 12px; color: var(--warm-gray); margin: 0;">
+              Most meals include protein, cooked veg, and fat. Add moderate carbs 1–2 times daily, usually earlier.
+            </p>
+          </div>
+          <div class="carb-lane-card" id="carb-lane-higher">
+            <strong class="carb-lane-title">△ Higher <span class="carb-lane-chip">Your Lane</span></strong>
+            <p style="font-size: 13px; color: var(--charcoal); margin: 8px 0;">
+              You can use more carbs well when your day demands it.
+            </p>
+            <p style="font-size: 12px; color: var(--warm-gray); margin: 0;">
+              Add larger carb portions around activity, especially earlier in the day. Dial back to ◇ Balanced by reducing the carb portion.
+            </p>
+          </div>
+        </div>
+        <div style="margin-top: 16px; padding: 12px; border-radius: 12px; border: 2px dashed var(--gold-harvest); background: rgba(232, 180, 79, 0.08);">
+          <strong>No naked carbs.</strong>
+          <p style="font-size: 12px; color: var(--charcoal); margin-top: 6px;">
+            If you eat carbs, pair them with protein and fat. If you have cravings, crashes, or night waking after 7 days, move one lane lower. If you feel flat, cold, wired, or under‑recovered, move one lane higher.
+          </p>
+        </div>
+        <div class="carb-lane-guardrail" id="carb-lane-higher-guardrail">
+          <h4 id="carb-lane-guardrail-heading">Higher may fit you</h4>
+          <p id="carb-lane-guardrail-body">Your answers suggest flat, cold, or under-fuel signals. If you feel better with more starch, add 1/2 cup at dinner for 2-3 days, keep added fat modest, then reassess.</p>
+          <p id="carb-lane-guardrail-underfuel" style="margin-top:8px;">If low carb has ever made you feel colder, flatter, or sleep worse, start your starch at dinner and increase by 1/2 cup every 2-3 days if steadier.</p>
+        </div>
+      </div>
+
+      <div class="comparison-card" id="comparison-card" style="display: none;">
+        <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">Compare with Previous Assessment</h3>
+        <p style="font-size: 13px; color: var(--warm-gray); margin-bottom: 12px;">
+          See how your terrain has shifted since your last assessment.
+        </p>
+        <div id="comparison-summary"></div>
+      </div>
+
+      <div class="form-card">
+        <h3>Download Your Results</h3>
+        <p style="color: var(--warm-gray); font-size: 14px;">Save a PDF copy for your records.</p>
+        <div class="download-buttons">
+          <button class="btn btn-secondary" onclick="downloadPdf()">Download Results as PDF</button>
+          <button class="btn btn-secondary" type="button" onclick="downloadQuickStartCard()" title="Half-page card for the fridge">🖨 Print kitchen card</button>
+        </div>
+      </div>
+
+      <div class="area-breakdown symbol-key-card" id="symbol-key-card">
+        <div class="symbol-key-title">Symbol Key</div>
+        <p class="symbol-key-sub">Screenshot or print this page to keep the legend handy. Order is locked: Reset → Carb Lane → Focus Areas → Tweaks.</p>
+
+        <div class="symbol-key-grid">
+          <div class="symbol-key-row">
+            <h4>1) Your Reset</h4>
+            <div class="symbol-key-line"><strong>Reset (14 days)</strong></div>
+            <div class="symbol-key-muted">Most people start here.</div>
+            <div class="symbol-key-line" style="margin-top: 8px;"><strong>Deep Reset (30 days) 🛡️</strong></div>
+          </div>
+
+          <div class="symbol-key-row">
+            <h4>2) Your Carb Lane (Starch Dial)</h4>
+            <div class="symbol-key-muted" style="margin-bottom: 8px;">These symbols tell you how much starch belongs in your meals.</div>
+            <div class="symbol-key-line"><strong>▽ Lower</strong></div>
+            <div class="symbol-key-line"><strong>◇ Balanced</strong></div>
+            <div class="symbol-key-line"><strong>△ Higher</strong></div>
+            <div class="symbol-key-muted" style="margin-top: 8px;"><strong>Lane colour rule:</strong> lane blues are used for header strips/navigation only. Plates stay neutral.</div>
+            <div class="symbol-key-muted">Lane header blues: <strong>#A8C3D4 / #6A9BB8 / #2D6E9E</strong></div>
+            <div class="symbol-key-lane-swatches" aria-hidden="true">
+              <span class="lane-swatch"><span class="lane-swatch-dot" style="background:#A8C3D4;"></span>▽ Lower</span>
+              <span class="lane-swatch"><span class="lane-swatch-dot" style="background:#6A9BB8;"></span>◇ Balanced</span>
+              <span class="lane-swatch"><span class="lane-swatch-dot" style="background:#2D6E9E;"></span>△ Higher</span>
+            </div>
+          </div>
+
+          <div class="symbol-key-row">
+            <h4>3) Your Focus Areas (7)</h4>
+            <div class="symbol-key-muted" style="margin-bottom: 8px;">These icons show what your body is asking you to focus on first.</div>
+            <div class="symbol-key-line">🌿 <strong>Belly</strong></div>
+            <div class="symbol-key-line">🍯 <strong>Sugar</strong></div>
+            <div class="symbol-key-line">🌙 <strong>Sleep</strong></div>
+            <div class="symbol-key-line">⚡ <strong>Stress</strong></div>
+            <div class="symbol-key-line">🔥 <strong>Metabolism</strong></div>
+            <div class="symbol-key-line">🌸 <strong>Hormones</strong></div>
+            <div class="symbol-key-line">💧 <strong>Drainage</strong></div>
+          </div>
+
+          <div class="symbol-key-row">
+            <h4>4) Tweaks (only if needed)</h4>
+            <div class="symbol-key-muted" style="margin-bottom: 8px;">These are optional overlays. Use only the ones that clearly apply.</div>
+            <div class="symbol-key-line">🎈 <strong>Bloat</strong></div>
+            <div class="symbol-key-line">🐝 <strong>Reactivity</strong></div>
+            <div class="symbol-key-line">🌵 <strong>Oxalates</strong></div>
+            <div class="symbol-key-line">🌶️ <strong>Nightshades</strong> (only if joint pain is active)</div>
+          </div>
+
+          <div class="symbol-key-row" style="grid-column: 1 / -1;">
+            <h4>Legend Order</h4>
+            <div class="symbol-key-line"><strong>Reset → Carb Lane → Focus Areas → Tweaks</strong></div>
+          </div>
+        </div>
+
+        <div class="download-buttons">
+          <button class="btn btn-secondary" type="button" onclick="printSymbolKey()">Print Symbol Key</button>
+        </div>
+      </div>
+
+      <div class="next-steps">
+        <h3>Your Next Steps</h3>
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-text">Review your personalized plan based on your results</div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-text" id="next-step-reset-text">Start with your Reset and Carb Lane</div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-text">Track your daily progress and symptoms</div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-text">Re-assess after 2 weeks to adjust your approach</div>
+        </div>
+        <button class="btn" style="background: white; color: var(--chlorophyll); margin-top: 24px; font-size: 16px; padding: 16px 32px;" onclick="resetQuiz()">
+          Take Assessment Again
+        </button>
+      </div>
+      <p class="note" id="flags-disclaimer" style="display:none; margin-top: 14px;">
+        This is educational and does not replace medical care. Use it to pick a safer starting point, then adjust based on your real-world response.
+      </p>
+    </div>
+  </main>
+
+  <script>
+    const CLIENT_ID = 'terrain-reset-assessment-v1';
+    const HUB_URL = 'https://script.google.com/macros/s/AKfycbxjMDr_f3Egoga2yiszCyg7o6DRSJmVtI_EdWqU74YMj_MoXtz6BG0FOjZTj6-jvn0/exec';
+    const STORAGE_KEY_PROGRESS = 'TR_QUIZ_progress_v1';
+    const STORAGE_KEY_PREVIOUS = 'TR_QUIZ_previous_v1';
+    const STORAGE_KEY_PROFILE = 'terrainResetProfile';
+    const PROGRESS_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+    const START_HERE_NEXT_STEP = 'Start Day 1 (Light Bookends)';
+    const START_HERE_WEEK1_LINE = 'Week 1 adds the 8 Daily Foundations one by one. Once you add one, keep it.';
+    const START_HERE_MIXED_EXPLAINER = 'Mixed means more than one area is close, or nothing is clear yet. Don’t force it. Follow the Day-by-Day Guide.';
+    const START_HERE_MIXED_INTRO = 'You landed on Mixed. That’s not a problem. It just means we build a clean baseline first so the feedback gets clearer.';
+    const START_HERE_SINGLE_INTRO = 'This is your Focus Area for Phase 1. Keep it simple and let the feedback get clearer.';
+
+    const answerOptionSets = {
+      frequency: [
+        { value: 0, label: 'Not in last 14 days' },
+        { value: 1, label: 'Occasional' },
+        { value: 2, label: 'Frequent' }
+      ],
+      severity: [
+        { value: 0, label: 'No' },
+        { value: 1, label: 'Mild' },
+        { value: 2, label: 'Significant' }
+      ],
+      intensity: [
+        { value: 0, label: 'No' },
+        { value: 1, label: 'Mild' },
+        { value: 2, label: 'Significant' }
+      ],
+      binaryIntensity: [
+        { value: 0, label: 'No' },
+        { value: 1, label: 'Sometimes' },
+        { value: 2, label: 'Often' }
+      ],
+      tempSwings: [
+        { value: 0, label: 'No' },
+        { value: 1, label: 'Mild' },
+        { value: 2, label: 'Intense' }
+      ],
+      cycleBreakouts: [
+        { value: 0, label: 'Never' },
+        { value: 1, label: 'Sometimes' },
+        { value: 2, label: 'Often' }
+      ],
+      energyPattern: [
+        { value: 0, label: 'Fairly steady all day' },
+        { value: 1, label: 'Need coffee or food to get going, then fine' },
+        { value: 2, label: 'Afternoon crash or multiple dips - need to push through' }
+      ],
+      recoveryRate: [
+        { value: 0, label: 'Quick - back to normal next day' },
+        { value: 1, label: 'Average - takes a day or two' },
+        { value: 2, label: 'Slow - takes several days, or I often feel worse before better' }
+      ],
+      stoolType: [
+        { value: 0, label: 'Formed and normal - no issues' },
+        { value: 1, label: 'Hard, dry, or pellet-like (tend toward constipation)' },
+        { value: 2, label: 'Loose, soft, or urgent (tend toward loose)' }
+      ],
+      hydrationLevel: [
+        { value: 0, label: 'More than 2 litres' },
+        { value: 1, label: '1 to 2 litres' },
+        { value: 2, label: 'Less than 1 litre - I rarely drink much water' }
+      ]
+    };
+
+    // Quiz Data - Matches original questionnaire exactly
+    const quizData = {
+      sections: [
+        {
+          id: 'belly',
+          emoji: '⚠️',
+          name: 'Digestion & Comfort',
+          color: '#D97236',
+          questions: [
+            { text: 'I wake up with a flatter belly, but <strong>bloat builds as the day goes on</strong>.', type: 'frequency' },
+            { text: 'I get <strong>gas, pressure, or cramping</strong> after meals.', type: 'frequency' },
+            { text: 'I feel <strong>overfull fast</strong> or meals sit heavy.', type: 'frequency' },
+            { text: '<strong>Raw salads or raw veggies</strong> make my belly feel worse.', type: 'frequency' },
+            { text: 'My stools swing between <strong>constipation and loose</strong>, or they are unpredictable.', type: 'frequency' },
+            { text: 'Most of the time, my stools are:', type: 'stoolType', optionsKey: 'stoolType' }
+          ]
+        },
+        {
+          id: 'sugar',
+          emoji: '🩸',
+          name: 'Blood Sugar Stability',
+          color: '#E8B44F',
+          questions: [
+            { text: 'I get an <strong>energy crash 1–3 hours after eating</strong>.', type: 'frequency' },
+            { text: 'I get <strong>strong cravings</strong> (sweet or snacky), especially later in the day.', type: 'frequency' },
+            { text: 'If a meal is delayed, I get <strong>shaky, irritable, or panicky-hungry</strong>.', type: 'frequency' },
+            { text: 'Starchy carbs make me <strong>hungrier soon after</strong>, not satisfied.', type: 'frequency' },
+            { text: 'After a higher-carb meal, I get <strong>sleepy, foggy, or heavy</strong>.', type: 'frequency' },
+            { text: 'After a regular meal, I feel my energy drop, get a foggy head, or want to lie down - even when I ate a reasonable amount.', type: 'frequency' },
+            { text: 'My energy across the day is best described as:', type: 'energyPattern', optionsKey: 'energyPattern' }
+          ]
+        },
+        {
+          id: 'sleep',
+          emoji: '🌙',
+          name: 'Sleep & Energy',
+          color: '#4A6FA5',
+          questions: [
+            { text: 'At bedtime I feel <strong>wide awake or get a second wind</strong>, <strong>or my mind is racing</strong>, so falling asleep takes more than ~30 minutes.', type: 'frequency' },
+            { text: 'I <strong>wake during the night</strong> and struggle to fall back asleep.', type: 'frequency' },
+            { text: 'I <strong>wake too early</strong> and my brain switches on.', type: 'frequency' },
+            { text: 'My sleep feels <strong>light or restless</strong>, even if I got "enough hours."', type: 'frequency' },
+            { text: 'I wake unrefreshed and <strong>need caffeine to come online</strong>.', type: 'frequency' }
+          ]
+        },
+        {
+          id: 'stress',
+          emoji: '🔥',
+          name: 'Stress & Nervous System',
+          color: '#C85A54',
+          questions: [
+            { text: 'I feel <strong>wired but tired</strong> (tired body, busy mind).', type: 'frequency' },
+            { text: 'I feel <strong>on edge</strong> or "buzzing" inside even when nothing is happening.', type: 'frequency' },
+            { text: 'My shoulders/neck/jaw feel <strong>tight</strong>, or I clench without meaning to.', type: 'frequency' },
+            { text: 'I <strong>startle easily</strong> or my heart races from notifications, noise, or small surprises.', type: 'frequency' },
+            { text: 'I feel <strong>emotionally flat</strong>, struggle to care about things, or feel <strong>burnt out</strong> (even if I\'m still functioning day to day). OR I <strong>crash harder than expected</strong> after activity and need longer than normal to recover.', type: 'frequency' }
+          ]
+        },
+        {
+          id: 'metabolism',
+          emoji: '🧊',
+          name: 'Metabolism & Energy',
+          color: '#A8B892',
+          questions: [
+            { text: 'I feel <strong>cold easily</strong> (hands, feet, or overall), especially in the morning.', type: 'intensity' },
+            { text: 'I wake after a full night\'s sleep and still feel <strong>groggy, heavy, or slow to come online</strong> - it takes more than an hour to feel like myself.', type: 'severity' },
+            { text: 'I have a <strong>constipation tendency</strong> or my digestion feels sluggish overall.', type: 'severity' },
+            { text: 'My hair feels thinner, my skin is drier, my nails are brittle, <strong>or I just feel like my metabolism has slowed down</strong>.', type: 'severity' },
+            { text: 'When I <strong>under-eat or skip meals</strong>, I feel colder, flatter, or more exhausted (not just hungry).', type: 'binaryIntensity' }
+          ]
+        },
+        {
+          id: 'hormones',
+          emoji: '🌸',
+          name: 'Hormones & Mood',
+          color: '#9B8FA8',
+          questions: [
+            { text: 'I notice <strong>temperature swings</strong> (wake hot, night sweats, hot flashes, or random chills).', type: 'frequency', optionsKey: 'tempSwings' },
+            { text: 'My <strong>libido is lower</strong> than it used to be, or I feel slower to bounce back after workouts or physical activity.', type: 'intensity' },
+            { text: 'My mood or energy feels <strong>unstable in waves</strong> (up/down) rather than steady.', type: 'frequency' },
+            {
+              text: 'I get <strong>breakouts</strong> that worsen around my cycle.',
+              type: 'binaryIntensity',
+              optionsKey: 'cycleBreakouts',
+              showWhen: 'cycle'
+            },
+            {
+              text: 'If you have a cycle: <strong>PMS, hormonal shifts, or cycle-related symptoms</strong> feel like a major factor affecting your daily life right now.',
+              textNoCycle: 'If you do not have a cycle: your <strong>resilience, recovery, or drive</strong> feels noticeably lower than normal and affects your daily life.',
+              type: 'intensity'
+            }
+          ]
+        },
+        {
+          id: 'drainage',
+          emoji: '💧',
+          name: 'Elimination & Detox',
+          color: '#4A6FA5',
+          questions: [
+            { text: 'I get <strong>puffy</strong> (face/eyes/hands) or my rings feel tighter than usual.', type: 'frequency' },
+            { text: 'In the last 14 days, I\'ve had persistent <strong>breakouts</strong> or clogged pores (skin "congestion"), especially when digestion is off or when I\'m exposed to irritants (foods, products, environment).', type: 'frequency' },
+            { text: 'I have ongoing <strong>sinus/nasal congestion</strong>, post-nasal drip, or thick mucus/phlegm.', type: 'frequency' },
+            { text: 'When I miss a bowel movement, I feel <strong>noticeably worse</strong> (headachy, heavy, moody).', type: 'binaryIntensity' },
+            { text: 'One drink affects me more than it used to (headache, flushed, or <strong>sleep gets wrecked</strong>).', type: 'intensity' },
+            { text: 'Strong smells (perfume, cleaning aisles, exhaust) can trigger <strong>headache, nausea, or brain fog</strong>.', type: 'binaryIntensity' },
+            { text: 'On a typical day, I drink roughly this much plain water (not including other drinks):', type: 'hydrationLevel', optionsKey: 'hydrationLevel' }
+          ]
+        }
+      ]
+    };
+
+    // State
+    let currentSectionIndex = 0;
+    let answers = {};
+    let previousAnswers = null;
+    let previousMeta = null;
+    let answersChanged = 0;
+    let userProfile = { sex: null, cycle: null, name: '', email: '' };
+    let safetyAnswers = { blood: false, weightLoss: false, edRisk: false, none: false };
+    let modifierAnswers = {
+      autoimmune: null,
+      painGate: null,
+      sibo: null,
+      histamine: null,
+      paceRecovery: null,
+      bile1: null,
+      bile2: null,
+      bile3: null,
+      environment: null
+    };
+    let flags = {
+      deepReset: false,
+      painGate: false,
+      sibo: false,
+      histamine: false,
+      oxalates: false,
+      histamineSource: null,
+      paceFirst: false,
+      bileSupport: false,
+      environment: false
+    };
+    const SAFE_PAIRS = [
+      ['sleep', 'stress'],
+      ['stress', 'sleep'],
+      ['sleep', 'metabolism'],
+      ['metabolism', 'sleep'],
+      ['hormones', 'drainage'],
+      ['drainage', 'hormones']
+    ];
+    let lastScores = null;
+    let lastOftenCounts = null;
+    let lastResult = null;
+
+    function safeLocalStorage() {
+      try {
+        return window.localStorage;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function getPersistableUserProfile() {
+      return {
+        sex: userProfile.sex || null,
+        cycle: userProfile.cycle || null
+      };
+    }
+
+    // -----------------------------
+    // Persistence (local storage)
+    // -----------------------------
+    function serializeProgress() {
+      return {
+        v: CLIENT_ID,
+        savedAt: new Date().toISOString(),
+        expiresAt: new Date(Date.now() + PROGRESS_TTL_MS).toISOString(),
+        userProfile: getPersistableUserProfile(),
+        safetyAnswers: { ...safetyAnswers },
+        modifierAnswers: { ...modifierAnswers },
+        pageId: getCurrentPageId(),
+        section: currentSectionIndex,
+        answers: { ...answers }
+      };
+    }
+
+    function getCurrentPageId() {
+      const active = document.querySelector('.page-view.active');
+      return active ? active.id.replace('-page', '') : 'intro';
+    }
+
+    function saveProgress() {
+      const ls = safeLocalStorage();
+      if (!ls) return;
+
+      const hasAny = Object.keys(answers).length > 0 || isAnySafetyChecked() || hasAnyModifierSet();
+      if (!hasAny) {
+        ls.removeItem(STORAGE_KEY_PROGRESS);
+        renderPersistBar(null);
+        return;
+      }
+
+      const payload = serializeProgress();
+      ls.setItem(STORAGE_KEY_PROGRESS, JSON.stringify(payload));
+      renderPersistBar(payload, { mode: 'saved' });
+    }
+
+    function loadSavedProgress() {
+      const ls = safeLocalStorage();
+      if (!ls) return null;
+      const raw = ls.getItem(STORAGE_KEY_PROGRESS);
+      if (!raw) return null;
+      try {
+        const parsed = JSON.parse(raw);
+        const expiresAt = parsed && parsed.expiresAt ? Date.parse(parsed.expiresAt) : NaN;
+        if (Number.isFinite(expiresAt) && expiresAt < Date.now()) {
+          ls.removeItem(STORAGE_KEY_PROGRESS);
+          return null;
+        }
+        return parsed;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function applySavedProgress(payload) {
+      if (!payload || !payload.answers) return;
+      answers = { ...payload.answers };
+      if (payload.userProfile) {
+        userProfile = {
+          ...userProfile,
+          sex: payload.userProfile.sex || null,
+          cycle: payload.userProfile.cycle || null
+        };
+      }
+      if (payload.safetyAnswers) {
+        safetyAnswers = { ...safetyAnswers, ...payload.safetyAnswers };
+      }
+      if (payload.modifierAnswers) {
+        modifierAnswers = { ...modifierAnswers, ...payload.modifierAnswers };
+      }
+      currentSectionIndex = Number.isFinite(payload.section) ? payload.section : 0;
+      saveProfile();
+      saveAnswers();
+      updateCycleUI();
+      hydrateSafetyInputs();
+      hydrateFinalChecksInputs();
+      updateAnswersChanged();
+      if (payload.pageId === 'final-checks') {
+        showFinalChecks();
+      } else {
+        loadSection();
+      }
+    }
+
+    function isAnySafetyChecked() {
+      return Boolean(safetyAnswers.blood || safetyAnswers.weightLoss || safetyAnswers.edRisk);
+    }
+
+    function hasAnyModifierSet() {
+      return Object.values(modifierAnswers).some(v => v !== null);
+    }
+
+    function renderPersistBar(payload, opts = {}) {
+      const bar = document.getElementById('persist-bar');
+      if (!bar) return;
+
+      const text = document.getElementById('persist-text');
+      const timeframeNote = document.getElementById('timeframe-note');
+      const btnRestore = document.getElementById('persist-restore-btn');
+      const btnFresh = document.getElementById('persist-fresh-btn');
+      const btnClear = document.getElementById('persist-clear-btn');
+
+      if (!payload) {
+        bar.style.display = 'none';
+        if (timeframeNote) timeframeNote.style.display = 'block';
+        return;
+      }
+
+      bar.style.display = 'flex';
+      if (timeframeNote) timeframeNote.style.display = 'none';
+
+      const when = payload.savedAt ? new Date(payload.savedAt).toLocaleString() : 'earlier';
+      const mode = opts.mode || 'found';
+
+      btnRestore.style.display = 'none';
+      btnFresh.style.display = 'none';
+      btnClear.style.display = 'none';
+
+      const setPersistText = (secondaryText) => {
+        if (!text) return;
+        text.textContent = '';
+        const primary = document.createElement('span');
+        primary.className = 'persist-primary-line';
+        primary.textContent = 'Answer based on the last 14 days.';
+        const secondary = document.createElement('span');
+        secondary.className = 'persist-secondary-line';
+        secondary.textContent = secondaryText;
+        text.appendChild(primary);
+        text.appendChild(secondary);
+      };
+
+      if (mode === 'restored') {
+        setPersistText(`Restored saved answers from ${when}. Review and update anything that changed.`);
+        btnFresh.style.display = 'inline-flex';
+        btnClear.style.display = 'inline-flex';
+      } else if (mode === 'saved') {
+        setPersistText(`Progress saved locally (${when}).`);
+        btnFresh.style.display = 'inline-flex';
+        btnClear.style.display = 'inline-flex';
+      } else {
+        setPersistText(`Saved answers found from ${when}. Restore to continue where you left off.`);
+        btnRestore.style.display = 'inline-flex';
+        btnClear.style.display = 'inline-flex';
+      }
+    }
+
+    function restoreSavedProgress() {
+      const payload = loadSavedProgress();
+      if (!payload) return;
+
+      if (Object.keys(answers).length > 0) {
+        const ok = confirm('Restore saved answers? This will overwrite your current selections on this device.');
+        if (!ok) return;
+      }
+
+      applySavedProgress(payload);
+      renderPersistBar(payload, { mode: 'restored' });
+    }
+
+    function clearSavedProgress() {
+      const ls = safeLocalStorage();
+      if (ls) ls.removeItem(STORAGE_KEY_PROGRESS);
+      renderPersistBar(null);
+    }
+
+    function startFresh() {
+      clearSavedProgress();
+      resetQuiz();
+    }
+
+    function savePreviousAssessment(payload) {
+      const ls = safeLocalStorage();
+      if (!ls) return;
+      ls.setItem(STORAGE_KEY_PREVIOUS, JSON.stringify(payload));
+    }
+
+    function loadPreviousAssessment() {
+      const ls = safeLocalStorage();
+      if (!ls) return null;
+      const raw = ls.getItem(STORAGE_KEY_PREVIOUS);
+      if (!raw) return null;
+      try {
+        return JSON.parse(raw);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // Initialize
+    function init() {
+      createSectionDots();
+      renderFinalChecksControls();
+      loadState();
+      hydrateSafetyInputs();
+      hydrateFinalChecksInputs();
+      updateCycleUI();
+      updateProgressMeta();
+      hydrateProfileInputs();
+      const savedProgress = loadSavedProgress();
+      if (savedProgress) {
+        renderPersistBar(savedProgress, { mode: 'found' });
+      }
+    }
+
+    function getStepperPalette(sectionId) {
+      const palettes = {
+        belly: { activeBg: '#E9EDE1', activeBorder: '#D9DECf', completedBg: '#F6F8F1', completedBorder: '#ECEFE3' },
+        sugar: { activeBg: '#F2E8CC', activeBorder: '#E6DCBF', completedBg: '#FAF6EA', completedBorder: '#F1EAD8' },
+        sleep: { activeBg: '#E1ECEC', activeBorder: '#D2E0E0', completedBg: '#F2F7F7', completedBorder: '#E5EFEF' },
+        stress: { activeBg: '#E6E8E8', activeBorder: '#D9DDDD', completedBg: '#F5F6F6', completedBorder: '#EAECEC' },
+        metabolism: { activeBg: '#EFE5D4', activeBorder: '#E4D8C4', completedBg: '#F8F3EA', completedBorder: '#EEE6DA' },
+        hormones: { activeBg: '#F0E0E7', activeBorder: '#E5D2DB', completedBg: '#F9F2F5', completedBorder: '#F0E5EA' },
+        drainage: { activeBg: '#E5E1F0', activeBorder: '#D9D3E7', completedBg: '#F5F3FA', completedBorder: '#EAE6F3' }
+      };
+      return palettes[sectionId] || { activeBg: '#EAE4DD', activeBorder: '#D6D0CA', completedBg: '#F2EFEA', completedBorder: '#E1DDD8' };
+    }
+
+    function createSectionDots() {
+      const dotsContainer = document.getElementById('section-dots');
+      dotsContainer.innerHTML = '';
+      quizData.sections.forEach((section, index) => {
+        const display = getFocusAreaDisplay(section.id) || { emoji: section.emoji, name: section.name };
+        const palette = getStepperPalette(section.id);
+        const dot = document.createElement('div');
+        dot.className = 'section-dot';
+        dot.id = `dot-${index}`;
+        dot.style.setProperty('--step-active-bg', palette.activeBg);
+        dot.style.setProperty('--step-active-border', palette.activeBorder);
+        dot.style.setProperty('--step-completed-bg', palette.completedBg);
+        dot.style.setProperty('--step-completed-border', palette.completedBorder);
+        dot.innerHTML = `
+          <span class="section-dot-circle" aria-hidden="true">${display.emoji}</span>
+          <span class="section-dot-label">${display.name}</span>
+        `;
+        dotsContainer.appendChild(dot);
+      });
+      updateDots();
+    }
+
+    function updateDots() {
+      quizData.sections.forEach((_, index) => {
+        const dot = document.getElementById(`dot-${index}`);
+        if (!dot) return;
+        dot.classList.remove('active', 'completed');
+        if (index === currentSectionIndex) {
+          dot.classList.add('active');
+        } else if (index < currentSectionIndex) {
+          dot.classList.add('completed');
+        }
+      });
+    }
+
+    function setSexStatus(value) {
+      userProfile.sex = value;
+      if (value === 'male') {
+        userProfile.cycle = 'no-cycle';
+      }
+      saveProfile();
+      updateCycleUI();
+      loadSection();
+    }
+
+    function setCycleStatus(value) {
+      userProfile.cycle = value;
+      saveProfile();
+      updateCycleUI();
+      loadSection();
+    }
+
+    function updateCycleUI() {
+      const femaleBtn = document.getElementById('sex-female');
+      const maleBtn = document.getElementById('sex-male');
+      if (femaleBtn) femaleBtn.classList.toggle('active', userProfile.sex === 'female');
+      if (maleBtn) maleBtn.classList.toggle('active', userProfile.sex === 'male');
+
+      const yesBtn = document.getElementById('cycle-yes');
+      const noBtn = document.getElementById('cycle-no');
+      const cycleCard = document.getElementById('cycle-card');
+      if (userProfile.sex === 'female') {
+        if (cycleCard) cycleCard.style.display = 'block';
+        if (yesBtn) yesBtn.classList.toggle('active', userProfile.cycle === 'cycle');
+        if (noBtn) noBtn.classList.toggle('active', userProfile.cycle === 'no-cycle');
+      } else {
+        if (cycleCard) cycleCard.style.display = 'none';
+        if (yesBtn) yesBtn.classList.remove('active');
+        if (noBtn) noBtn.classList.remove('active');
+      }
+
+      const startBtn = document.getElementById('start-btn');
+      const startNote = document.getElementById('start-note');
+      const safetyStop = document.getElementById('safety-stop-message');
+      const blockedBySafety = isAnySafetyChecked();
+      const readyForStart = userProfile.sex && (userProfile.sex === 'male' || userProfile.cycle);
+      if (startBtn) startBtn.disabled = !readyForStart || blockedBySafety;
+      if (safetyStop) safetyStop.style.display = blockedBySafety ? 'block' : 'none';
+      if (startNote) {
+        if (blockedBySafety) {
+          startNote.textContent = 'Safety check requires a clinical route before this protocol.';
+        } else if (!userProfile.sex) {
+          startNote.textContent = 'Select your sex to begin.';
+        } else if (userProfile.sex === 'female' && !userProfile.cycle) {
+          startNote.textContent = 'Select your cycle status to begin.';
+        } else {
+          startNote.textContent = 'Ready when you are.';
+        }
+      }
+    }
+
+    function hydrateProfileInputs() {
+      const nameInput = document.getElementById('profile-name');
+      const emailInput = document.getElementById('profile-email');
+      if (nameInput) nameInput.value = userProfile.name || '';
+      if (emailInput) emailInput.value = userProfile.email || '';
+    }
+
+    function saveProfileFromInputs() {
+      const nameInput = document.getElementById('profile-name');
+      const emailInput = document.getElementById('profile-email');
+      if (nameInput) userProfile.name = nameInput.value.trim();
+      if (emailInput) userProfile.email = emailInput.value.trim().toLowerCase();
+      saveProfile();
+    }
+
+    function setSafetyAnswer(key, checked) {
+      if (key === 'none') {
+        safetyAnswers.none = checked;
+        if (checked) {
+          safetyAnswers.blood = false;
+          safetyAnswers.weightLoss = false;
+          safetyAnswers.edRisk = false;
+        }
+      } else {
+        safetyAnswers[key] = checked;
+        if (checked) safetyAnswers.none = false;
+      }
+      hydrateSafetyInputs();
+      updateCycleUI();
+      saveProgress();
+    }
+
+    function hydrateSafetyInputs() {
+      const blood = document.getElementById('safety-blood');
+      const weight = document.getElementById('safety-weight');
+      const ed = document.getElementById('safety-ed');
+      const none = document.getElementById('safety-none');
+      if (blood) blood.checked = Boolean(safetyAnswers.blood);
+      if (weight) weight.checked = Boolean(safetyAnswers.weightLoss);
+      if (ed) ed.checked = Boolean(safetyAnswers.edRisk);
+      if (none) none.checked = Boolean(safetyAnswers.none);
+    }
+
+    function clearSafetyAnswers() {
+      safetyAnswers = { blood: false, weightLoss: false, edRisk: false, none: false };
+      hydrateSafetyInputs();
+      updateCycleUI();
+      saveProgress();
+    }
+
+    function renderYesNoControl(containerId, key) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const val = modifierAnswers[key];
+      container.innerHTML = `
+        <button class="option-btn ${val === true ? 'active' : ''}" type="button" onclick="setModifierAnswer('${key}', true)">Yes</button>
+        <button class="option-btn ${val === false ? 'active' : ''}" type="button" onclick="setModifierAnswer('${key}', false)">No</button>
+      `;
+    }
+
+    function renderScaleControl(containerId, key, promptText) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const val = modifierAnswers[key];
+      container.innerHTML = `
+        <div style="font-size: 14px; color: var(--charcoal); margin-bottom: 8px;">${promptText}</div>
+        <div class="modifier-row">
+          <button class="option-btn ${val === 0 ? 'active' : ''}" type="button" onclick="setModifierAnswer('${key}', 0)">0 - No</button>
+          <button class="option-btn ${val === 1 ? 'active' : ''}" type="button" onclick="setModifierAnswer('${key}', 1)">1 - Sometimes</button>
+          <button class="option-btn ${val === 2 ? 'active' : ''}" type="button" onclick="setModifierAnswer('${key}', 2)">2 - Often</button>
+        </div>
+      `;
+    }
+
+    function renderRecoveryControl(containerId, key, promptText) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const val = modifierAnswers[key];
+      const options = answerOptionSets.recoveryRate || [];
+      container.innerHTML = `
+        <div style="font-size: 14px; color: var(--charcoal); margin-bottom: 8px;">${promptText}</div>
+        <div class="modifier-row">
+          ${options.map(option => `
+            <button class="option-btn ${val === option.value ? 'active' : ''}" type="button" onclick="setModifierAnswer('${key}', ${option.value})">${option.value} - ${option.label}</button>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function renderFinalChecksControls() {
+      renderYesNoControl('modifier-autoimmune', 'autoimmune');
+      renderYesNoControl('modifier-pain', 'painGate');
+      renderYesNoControl('modifier-sibo', 'sibo');
+      renderYesNoControl('modifier-histamine', 'histamine');
+      renderRecoveryControl('modifier-pace-recovery', 'paceRecovery', 'After exercise or a physically demanding day, how do you recover?');
+      renderScaleControl('modifier-bile-1', 'bile1', 'Higher-fat meals leave me nauseous, refluxy, or uncomfortably full.');
+      renderScaleControl('modifier-bile-2', 'bile2', 'My stools often float, look greasy, or are hard to wipe clean.');
+      renderScaleControl('modifier-bile-3', 'bile3', 'I feel worse after richer meals and better with simpler meals or smaller portions of fat.');
+      renderYesNoControl('modifier-environment', 'environment');
+    }
+
+    function hydrateFinalChecksInputs() {
+      renderFinalChecksControls();
+    }
+
+    function setModifierAnswer(key, value) {
+      modifierAnswers[key] = value;
+      renderFinalChecksControls();
+      saveProgress();
+    }
+
+    function isFinalChecksComplete() {
+      const required = ['autoimmune', 'painGate', 'sibo', 'histamine', 'paceRecovery', 'bile1', 'bile2', 'bile3', 'environment'];
+      return required.every(key => modifierAnswers[key] !== null);
+    }
+
+    function showFinalChecks() {
+      showPage('final-checks');
+      hydrateFinalChecksInputs();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function backToLastSection() {
+      showPage('quiz');
+      currentSectionIndex = quizData.sections.length - 1;
+      loadSection();
+    }
+
+    function finalizeFromChecks() {
+      if (!isFinalChecksComplete()) {
+        alert('Please complete all Final Checks before viewing results.');
+        return;
+      }
+      calculateResults();
+    }
+
+    function getQuestionText(question) {
+      if (userProfile.cycle === 'no-cycle' && question.textNoCycle) {
+        return question.textNoCycle;
+      }
+      return question.text;
+    }
+
+    function isQuestionVisible(question) {
+      if (question.showWhen === 'cycle' && userProfile.cycle !== 'cycle') return false;
+      if (question.showWhen === 'no-cycle' && userProfile.cycle !== 'no-cycle') return false;
+      return true;
+    }
+
+    function getVisibleQuestions(section) {
+      return section.questions
+        .map((q, idx) => ({ ...q, _index: idx }))
+        .filter(q => isQuestionVisible(q));
+    }
+
+    function getAnswerOptions(question) {
+      if (question.optionsKey && answerOptionSets[question.optionsKey]) {
+        return answerOptionSets[question.optionsKey];
+      }
+      return answerOptionSets[question.type] || answerOptionSets.frequency;
+    }
+
+    function getAnswerLabel(question, value) {
+      const options = getAnswerOptions(question);
+      const match = options.find(option => option.value === value);
+      return match ? match.label : '';
+    }
+
+    function getAllQuestionIds() {
+      const ids = [];
+      quizData.sections.forEach(section => {
+        section.questions.forEach((_, qIndex) => {
+          ids.push(`${section.id}-${qIndex}`);
+        });
+      });
+      return ids;
+    }
+
+    function getTotalQuestionCount() {
+      let total = 0;
+      quizData.sections.forEach(section => {
+        section.questions.forEach(question => {
+          if (isQuestionVisible(question)) total += 1;
+        });
+      });
+      return total;
+    }
+
+    function getAnsweredCount() {
+      let count = 0;
+      quizData.sections.forEach(section => {
+        section.questions.forEach((question, qIndex) => {
+          if (!isQuestionVisible(question)) return;
+          const key = `${section.id}-${qIndex}`;
+          if (answers[key] !== undefined) count += 1;
+        });
+      });
+      return count;
+    }
+
+    function isSectionComplete(sectionIndex = currentSectionIndex) {
+      const section = quizData.sections[sectionIndex];
+      for (let i = 0; i < section.questions.length; i++) {
+        const question = section.questions[i];
+        if (!isQuestionVisible(question)) continue;
+        const key = `${section.id}-${i}`;
+        if (answers[key] === undefined) return false;
+      }
+      return true;
+    }
+
+    function updateProgressMeta() {
+      const answered = getAnsweredCount();
+      const total = getTotalQuestionCount();
+      const answeredEl = document.getElementById('answered-count');
+      const totalEl = document.getElementById('total-questions');
+      if (answeredEl) answeredEl.textContent = answered;
+      if (totalEl) totalEl.textContent = total;
+
+      const sectionStatus = document.getElementById('section-status');
+      if (sectionStatus) {
+        sectionStatus.textContent = isSectionComplete() ? 'Section complete' : 'Section incomplete';
+      }
+
+      const nextBtn = document.getElementById('next-btn');
+      if (nextBtn) nextBtn.disabled = !isSectionComplete();
+    }
+
+    function loadSection() {
+      if (!document.getElementById('questions-container')) return;
+      const section = quizData.sections[currentSectionIndex];
+
+      // Update section badge
+      const sectionDisplay = getFocusAreaDisplay(section.id) || { emoji: section.emoji, name: section.name, descriptor: section.name };
+      document.getElementById('section-emoji').textContent = sectionDisplay.emoji;
+      document.getElementById('section-name').textContent = sectionDisplay.name;
+      const descriptorEl = document.getElementById('section-descriptor');
+      if (descriptorEl) descriptorEl.textContent = sectionDisplay.descriptor || section.name;
+
+      // Update progress
+      const progress = Math.round((currentSectionIndex / quizData.sections.length) * 100);
+      document.getElementById('current-section').textContent = currentSectionIndex + 1;
+      document.getElementById('progress-percent').textContent = progress;
+      document.getElementById('progress-fill').style.width = progress + '%';
+
+      // Load questions
+      const container = document.getElementById('questions-container');
+      container.innerHTML = '';
+
+      const visibleQuestions = getVisibleQuestions(section);
+      let displayIndex = 0;
+
+      visibleQuestions.forEach(question => {
+        const qIndex = question._index;
+        const globalQIndex = `${section.id}-${qIndex}`;
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        if (answers[globalQIndex] !== undefined) {
+          card.classList.add('answered');
+        }
+
+        const options = getAnswerOptions(question);
+        const previousValue = previousAnswers ? previousAnswers[globalQIndex] : undefined;
+
+        const optionButtons = options.map(option => {
+          const selected = answers[globalQIndex] === option.value ? 'selected' : '';
+          const showPrevious = previousValue === option.value && answers[globalQIndex] === undefined ? 'previous' : '';
+          return `
+            <button class="answer-btn ${selected} ${showPrevious}"
+                    onclick="selectAnswer('${globalQIndex}', ${option.value}, this)">
+              ${option.label}
+            </button>
+          `;
+        }).join('');
+
+        card.innerHTML = `
+          <div class="question-header">
+            <div class="question-number">${displayIndex + 1}</div>
+            <div class="question-text">${getQuestionText(question)}</div>
+          </div>
+          <div class="answer-options">${optionButtons}</div>
+        `;
+
+        container.appendChild(card);
+        displayIndex += 1;
+      });
+
+      // Update navigation
+      document.getElementById('prev-btn').disabled = currentSectionIndex === 0;
+      const nextBtn = document.getElementById('next-btn');
+      if (currentSectionIndex === quizData.sections.length - 1) {
+        nextBtn.textContent = 'Final Checks →';
+      } else {
+        nextBtn.textContent = 'Next →';
+      }
+
+      updateDots();
+      updateProgressMeta();
+      saveAnswers();
+    }
+
+    function selectAnswer(questionId, value, button) {
+      answers[questionId] = value;
+
+      const buttons = button.parentElement.querySelectorAll('.answer-btn');
+      buttons.forEach(btn => btn.classList.remove('selected', 'previous'));
+      button.classList.add('selected');
+
+      button.closest('.question-card').classList.add('answered');
+
+      updateAnswersChanged();
+      updateProgressMeta();
+      saveAnswers();
+    }
+
+    function nextSection() {
+      if (!isSectionComplete()) {
+        alert('Please answer all questions in this section before continuing.');
+        return;
+      }
+
+      if (currentSectionIndex < quizData.sections.length - 1) {
+        currentSectionIndex++;
+        loadSection();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        showFinalChecks();
+      }
+    }
+
+    function previousSection() {
+      if (currentSectionIndex > 0) {
+        currentSectionIndex--;
+        loadSection();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // -----------------------------
+    // Scoring & routing
+    // -----------------------------
+    function getScoreColor(score) {
+      if (score <= 3) return '#6F99AF';
+      if (score <= 6) return '#E8B44F';
+      return '#D97236';
+    }
+
+    function getScoreLabel(score) {
+      if (score <= 3) return 'Low';
+      if (score <= 6) return 'Notable';
+      return 'High';
+    }
+
+    function computeScoresForAnswers(answerSet) {
+      const scores = {};
+      const oftenCounts = {};
+
+      quizData.sections.forEach(section => {
+        let total = 0;
+        let answeredCount = 0;
+        let often = 0;
+
+        section.questions.forEach((question, qIndex) => {
+          if (!isQuestionVisible(question)) return;
+          const answer = answerSet[`${section.id}-${qIndex}`];
+          if (answer !== undefined) {
+            total += answer;
+            answeredCount += 1;
+            if (answer === 2) often += 1;
+          } else {
+            answeredCount += 1;
+          }
+        });
+
+        if (answeredCount === 0) {
+          scores[section.id] = 0;
+        } else {
+          const maxScore = answeredCount * 2;
+          scores[section.id] = Math.round((total / maxScore) * 10);
+        }
+        oftenCounts[section.id] = often;
+      });
+
+      return { scores, oftenCounts };
+    }
+
+    // ACCURATE SCORING - matches original questionnaire logic
+    function calculateResults() {
+      if (isAnySafetyChecked()) {
+        alert('Safety check is not cleared. Please use a clinical route before this protocol.');
+        showPage('intro');
+        return;
+      }
+      const computed = computeScoresForAnswers(answers);
+      const scores = computed.scores;
+      const oftenCounts = computed.oftenCounts;
+      lastScores = scores;
+      lastOftenCounts = oftenCounts;
+      computeFlags();
+
+      const routing = computeFocusAreaRouting(scores);
+      const primaryFocus = routing.primaryId;
+      const acknowledgement = routing.acknowledgement;
+      const clarity = {
+        level: primaryFocus === 'mixed' ? 'Low' : 'High',
+        isLow: primaryFocus === 'mixed'
+      };
+
+      displayResults(scores, primaryFocus, null, clarity, acknowledgement);
+    }
+
+    function isSafePair(a, b) {
+      return SAFE_PAIRS.some(pair => pair[0] === a && pair[1] === b);
+    }
+
+    function buildAcknowledgement(primaryId, secondaryId) {
+      const secondaryDisplay = getFocusAreaDisplay(secondaryId);
+      const secondaryName = secondaryDisplay ? secondaryDisplay.name : secondaryId;
+      const primaryDisplay = getFocusAreaDisplay(primaryId);
+      const primaryName = primaryDisplay ? primaryDisplay.name : primaryId;
+      return `${secondaryName} is close behind. They tend to travel together, so start with ${primaryName} and ${secondaryName} often follows.`;
+    }
+
+    function computeFocusAreaRouting(scores) {
+      const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+      const [A_name, A = 0] = sorted[0] || ['', 0];
+      const [B_name, B = 0] = sorted[1] || ['', 0];
+      const [, C = 0] = sorted[2] || ['', 0];
+
+      // Rule 0: Low + flat override
+      if (A <= 3 && (A - B) <= 1) {
+        return { primaryId: 'mixed', acknowledgement: null };
+      }
+
+      // Rule A: Clear dominant
+      if ((A - B) >= 3) {
+        return { primaryId: A_name, acknowledgement: null };
+      }
+
+      // Rule B: Clean two-signal safe pair
+      if ((A - B) <= 2 && (B - C) >= 2 && isSafePair(A_name, B_name)) {
+        return {
+          primaryId: A_name,
+          acknowledgement: buildAcknowledgement(A_name, B_name)
+        };
+      }
+
+      // Rule C: Everything else
+      return { primaryId: 'mixed', acknowledgement: null };
+    }
+
+    function getQuestionAnswerByText(sectionId, patterns) {
+      const section = quizData.sections.find(s => s.id === sectionId);
+      if (!section) return undefined;
+      for (let i = 0; i < section.questions.length; i++) {
+        const q = section.questions[i];
+        const rawText = (q.text || '').replace(/<[^>]*>/g, '').toLowerCase();
+        const matched = patterns.every(pattern => rawText.includes(pattern));
+        if (matched) {
+          return answers[`${sectionId}-${i}`];
+        }
+      }
+      return undefined;
+    }
+
+    function computeFlags() {
+      const alcoholSensitivityAnswer = getQuestionAnswerByText('drainage', ['one drink affects']);
+      const strongSmellsAnswer = getQuestionAnswerByText('drainage', ['strong smells']);
+      const inferredHistamine = alcoholSensitivityAnswer === 2 || strongSmellsAnswer === 2;
+      const paceRecovery = Number(modifierAnswers.paceRecovery || 0);
+      const paceFirst = paceRecovery >= 1;
+      const bileValues = [modifierAnswers.bile1, modifierAnswers.bile2, modifierAnswers.bile3].map(v => Number(v || 0));
+      const bileSum = bileValues.reduce((sum, v) => sum + v, 0);
+      const bileTwos = bileValues.filter(v => v === 2).length;
+
+      flags = {
+        deepReset: modifierAnswers.autoimmune === true,
+        painGate: modifierAnswers.painGate === true,
+        sibo: modifierAnswers.sibo === true,
+        histamine: modifierAnswers.histamine === true || inferredHistamine,
+        histamineSource: modifierAnswers.histamine === true ? 'explicit' : (inferredHistamine ? 'inferred' : null),
+        paceFirst: paceFirst,
+        bileSupport: bileTwos >= 2 || bileSum >= 4,
+        environment: modifierAnswers.environment === true
+      };
+      return flags;
+    }
+
+    function renderFlagBadges() {
+      const row = document.getElementById('flag-row');
+      const disclaimer = document.getElementById('flags-disclaimer');
+      if (!row || !disclaimer) return;
+
+      const badgeItems = [];
+      if (flags.paceFirst) {
+        badgeItems.push('<strong>PACE FIRST</strong><br>For the next 14 days, keep it gentle. Aim for steadier days and clearer feedback. Skip fasting experiments and cold plunges for now.');
+      }
+      if (flags.painGate) {
+        badgeItems.push('<strong>🌶️ NIGHTSHADES</strong><br>Joint pain is active. Exclude nightshades for 14 days (potato, tomato, peppers, eggplant). Use swaps like sweet potato, cassava, taro.');
+      }
+      if (flags.sibo) {
+        badgeItems.push('<strong>SIBO / LOW-FODMAP MODE</strong><br>If fiber makes you worse, start with a low-FODMAP version of the plan and keep veggies simpler at first.');
+      }
+      if (flags.histamine) {
+        const label = flags.histamineSource === 'inferred' ? 'POSSIBLE HISTAMINE REACTIVITY' : 'HISTAMINE / FRESH ONLY';
+        badgeItems.push(`<strong>${label}</strong><br>Prioritize fresh foods. Freeze portions promptly and avoid aged, fermented, and leftover-heavy eating for now.`);
+      }
+      if (flags.bileSupport) {
+        badgeItems.push('<strong>BILE SUPPORT</strong><br>Keep meals warm and simple, use smaller fat portions at first, and consider a sour or bitter taste before meals if tolerated (lemon, vinegar).');
+      }
+      if (flags.environment) {
+        badgeItems.push('<strong>ENVIRONMENT FLAG</strong><br>If your progress stalls despite good compliance, treat your environment as a real lever. Start with bedroom air quality and dampness control first.');
+      }
+
+      row.innerHTML = badgeItems.map(item => `<div class="flag-badge">${item}</div>`).join('');
+      disclaimer.style.display = badgeItems.length > 0 ? 'block' : 'none';
+    }
+
+    function getFocusAreaDisplay(sectionId) {
+      const map = {
+        belly: { emoji: '🌿', name: 'Belly', descriptor: 'Digestion & Comfort' },
+        sugar: { emoji: '🍯', name: 'Sugar', descriptor: 'Blood Sugar Stability' },
+        sleep: { emoji: '🌙', name: 'Sleep', descriptor: 'Sleep & Energy' },
+        stress: { emoji: '⚡', name: 'Stress', descriptor: 'Stress & Nervous System' },
+        metabolism: { emoji: '🔥', name: 'Metabolism', descriptor: 'Metabolism & Energy' },
+        hormones: { emoji: '🌸', name: 'Hormones', descriptor: 'Hormones & Mood' },
+        drainage: { emoji: '💧', name: 'Drainage', descriptor: 'Elimination & Detox' }
+      };
+      return map[sectionId] || null;
+    }
+
+    function getResetPlanLabel() {
+      return (flags && flags.deepReset === true) ? '🛡️ Deep Reset (30 days)' : '↺ Reset (14 days)';
+    }
+
+    // -----------------------------
+    // Start Here summary model
+    // -----------------------------
+    function getNextStepResetText() {
+      return START_HERE_NEXT_STEP;
+    }
+
+    function getEnabledTweaksForPlan() {
+      return [
+        flags.sibo ? '🎈 Bloat' : null,
+        flags.histamine ? '🐝 Reactivity' : null,
+        flags.oxalates ? '🌵 Oxalates' : null,
+        flags.painGate ? '🌶️ Nightshades (only if joint pain is active)' : null
+      ].filter(Boolean);
+    }
+
+    function buildStartHereSummary(primaryId, clarity, isMixed, acknowledgement = null) {
+      const primaryDisplay = !isMixed
+        ? (getFocusAreaDisplay(primaryId) || { name: primaryId })
+        : { name: 'Mixed' };
+      const tweakItems = getEnabledTweaksForPlan();
+      return {
+        introLine: isMixed ? START_HERE_MIXED_INTRO : START_HERE_SINGLE_INTRO,
+        resetLabel: getResetPlanLabel(),
+        laneLabel: getRecommendedCarbLaneLabel(primaryId, clarity),
+        focusLabel: isMixed ? 'Mixed' : primaryDisplay.name,
+        focusExplainer: isMixed ? START_HERE_MIXED_EXPLAINER : (acknowledgement || ''),
+        tweaksText: tweakItems.length ? tweakItems.join(' + ') : 'None',
+        nextStepText: getNextStepResetText(),
+        week1Line: START_HERE_WEEK1_LINE
+      };
+    }
+
+    const HIGHER_CANDIDATE_COPY = {
+      heading: 'Higher may fit you',
+      body: 'Your answers suggest flat, cold, or under-fuel signals. If you feel better with more starch, add 1/2 cup at dinner for 2-3 days, keep added fat modest, then reassess.'
+    };
+
+    const UNDERFUEL_GUARDRAIL_COPY = 'If low carb has ever made you feel colder, flatter, or sleep worse, start your starch at dinner and increase by 1/2 cup every 2-3 days if steadier.';
+
+    function getRecommendedCarbLane(primaryId, clarity) {
+      if (clarity && clarity.isLow) return 'balanced';
+      const sugarScore = lastScores && typeof lastScores.sugar === 'number' ? lastScores.sugar : 0;
+      const sugarOften = lastOftenCounts && typeof lastOftenCounts.sugar === 'number' ? lastOftenCounts.sugar : 0;
+      const sugarHigh = (sugarScore >= 7) || (sugarOften >= 3);
+      if (sugarHigh) return 'lower';
+      return 'balanced';
+    }
+
+    function getSuggestHigher() {
+      const sugarScore = lastScores && typeof lastScores.sugar === 'number' ? lastScores.sugar : 0;
+      const sugarOften = lastOftenCounts && typeof lastOftenCounts.sugar === 'number' ? lastOftenCounts.sugar : 0;
+      const sugarHigh = (sugarScore >= 7) || (sugarOften >= 3);
+
+      const underFuelPoints = (answers['metabolism-0'] || 0)
+        + (answers['metabolism-1'] || 0)
+        + (answers['metabolism-4'] || 0);
+
+      return (!sugarHigh) && (underFuelPoints >= 4);
+    }
+
+    function highlightCarbLane(primaryId, clarity) {
+      ['lower', 'balanced', 'higher'].forEach(key => {
+        const el = document.getElementById(`carb-lane-${key}`);
+        if (el) el.classList.remove('active');
+      });
+      const laneKey = getRecommendedCarbLane(primaryId, clarity);
+      const active = document.getElementById(`carb-lane-${laneKey}`);
+      if (active) active.classList.add('active');
+    }
+
+    function getRecommendedCarbLaneLabel(primaryId, clarity) {
+      const key = getRecommendedCarbLane(primaryId, clarity);
+      if (key === 'lower') return '▽ Lower';
+      if (key === 'higher') return '△ Higher';
+      return '◇ Balanced';
+    }
+
+    function renderCarbLaneGuardrail(primaryId, clarity) {
+      const el = document.getElementById('carb-lane-higher-guardrail');
+      if (!el) return;
+      const laneKey = getRecommendedCarbLane(primaryId, clarity);
+      const show = laneKey === 'balanced' && getSuggestHigher() === true;
+      el.style.display = show ? 'block' : 'none';
+      if (!show) return;
+
+      const heading = document.getElementById('carb-lane-guardrail-heading');
+      const body = document.getElementById('carb-lane-guardrail-body');
+      const underfuel = document.getElementById('carb-lane-guardrail-underfuel');
+      if (heading) heading.textContent = HIGHER_CANDIDATE_COPY.heading;
+      if (body) body.textContent = HIGHER_CANDIDATE_COPY.body;
+      if (underfuel) underfuel.textContent = UNDERFUEL_GUARDRAIL_COPY;
+    }
+
+    function displayResults(scores, primaryId, secondaryId, clarity, acknowledgement = null) {
+      const isMixed = primaryId === 'mixed';
+      const primary = !isMixed ? quizData.sections.find(s => s.id === primaryId) : null;
+      const secondary = secondaryId ? quizData.sections.find(s => s.id === secondaryId) : null;
+      const primaryDisplay = !isMixed
+        ? (getFocusAreaDisplay(primaryId) || { emoji: primary.emoji, name: primary.name })
+        : { emoji: '🧭', name: 'Mixed', descriptor: '' };
+      const primaryName = !isMixed ? primary.name : 'Mixed';
+      const secondaryName = secondary ? secondary.name : '';
+      lastResult = {
+        scores,
+        primaryId,
+        primaryName,
+        secondaryId: secondaryId || '',
+        secondaryName,
+        clarity,
+        mixed: clarity.isLow,
+        acknowledgement: acknowledgement || null,
+        flags: { ...flags }
+      };
+
+      const focusCardHeading = document.getElementById('focus-card-heading');
+      const primaryEmojiEl = document.getElementById('primary-emoji');
+      const focusIntroLine = document.getElementById('focus-intro-line');
+      const planResetLine = document.getElementById('plan-reset-line');
+      const planCarbLine = document.getElementById('plan-carb-line');
+      const planFocusLine = document.getElementById('plan-focus-line');
+      const focusExplainerLine = document.getElementById('focus-explainer-line');
+      const planTweaksLine = document.getElementById('plan-tweaks-line');
+      const planNextStepLine = document.getElementById('plan-next-step-line');
+
+      if (focusCardHeading) focusCardHeading.textContent = 'Your Starting Point';
+      if (primaryEmojiEl) primaryEmojiEl.textContent = isMixed ? '🧭' : primaryDisplay.emoji;
+      const startHere = buildStartHereSummary(primaryId, clarity, isMixed, acknowledgement);
+      if (focusIntroLine) focusIntroLine.textContent = startHere.introLine;
+      if (planResetLine) planResetLine.innerHTML = `<strong>Reset length:</strong> ${startHere.resetLabel}`;
+      if (planCarbLine) planCarbLine.innerHTML = `<strong>Carb Lane:</strong> ${startHere.laneLabel}`;
+      if (planFocusLine) planFocusLine.innerHTML = `<strong>Focus:</strong> ${startHere.focusLabel}`;
+      if (focusExplainerLine) {
+        if (startHere.focusExplainer) {
+          focusExplainerLine.textContent = startHere.focusExplainer;
+          focusExplainerLine.style.display = 'block';
+        } else {
+          focusExplainerLine.textContent = '';
+          focusExplainerLine.style.display = 'none';
+        }
+      }
+      if (planTweaksLine) planTweaksLine.innerHTML = `<strong>Tweaks:</strong> ${startHere.tweaksText}`;
+      if (planNextStepLine) planNextStepLine.innerHTML = `<strong>Next step:</strong> ${startHere.nextStepText}`;
+
+      renderFlagBadges();
+
+      const container = document.getElementById('all-areas');
+      container.innerHTML = '';
+
+      const sortedSections = quizData.sections
+        .map(s => ({ ...s, score: scores[s.id] }))
+        .sort((a, b) => b.score - a.score);
+
+      sortedSections.forEach(section => {
+        const display = getFocusAreaDisplay(section.id) || { emoji: section.emoji, name: section.name };
+        const item = document.createElement('div');
+        item.className = 'area-item';
+        if (!isMixed && section.id === primaryId) item.classList.add('primary');
+
+        item.innerHTML = `
+          <div class="area-header">
+            <span class="area-emoji">${display.emoji}</span>
+            <div class="area-info">
+              <span class="area-name">${display.name}</span>
+              <span class="area-score">${section.score}/10</span>
+            </div>
+          </div>
+          <div class="area-descriptor">${display.descriptor || section.name}</div>
+          <div class="score-label-chip">
+            <span class="score-dot" style="background:${getScoreColor(section.score)};"></span>
+            ${getScoreLabel(section.score)}
+          </div>
+          <div class="area-progress">
+            <div class="area-progress-fill" style="width: ${(section.score / 10 * 100)}%; background: ${getScoreColor(section.score)};"></div>
+          </div>
+        `;
+
+        container.appendChild(item);
+      });
+
+      renderComparison(scores, clarity);
+      highlightCarbLane(primaryId, clarity);
+      renderCarbLaneGuardrail(primaryId, clarity);
+      updateAnswersChangedBadge();
+      const nextStepResetText = document.getElementById('next-step-reset-text');
+      if (nextStepResetText) nextStepResetText.textContent = getNextStepResetText();
+      renderQASummary();
+
+      const qaCard = document.getElementById('qa-summary-card');
+      const comparisonCard = document.getElementById('comparison-card');
+      const resultsPage = document.getElementById('results-page');
+      const disclaimer = document.getElementById('flags-disclaimer');
+      if (resultsPage) {
+        if (comparisonCard) {
+          if (disclaimer && disclaimer.parentNode === resultsPage) {
+            resultsPage.insertBefore(comparisonCard, disclaimer);
+          } else {
+            resultsPage.appendChild(comparisonCard);
+          }
+        }
+        if (qaCard) {
+          if (disclaimer && disclaimer.parentNode === resultsPage) {
+            resultsPage.insertBefore(qaCard, disclaimer);
+          } else {
+            resultsPage.appendChild(qaCard);
+          }
+        }
+      }
+
+      const payload = buildHubPayload(scores, primaryName, secondaryName, clarity);
+      sendResultsToHub(payload);
+
+      previousAnswers = { ...answers };
+      previousMeta = { timestamp: new Date().toISOString(), cycle: userProfile.cycle || '' };
+      savePreviousAssessment({
+        savedAt: previousMeta.timestamp,
+        cycle: previousMeta.cycle,
+        answers: previousAnswers,
+        scores,
+        primary_focus: primaryName,
+        secondary_focus: secondaryName,
+        clarity: clarity.level
+      });
+
+      showPage('results');
+      renderCodeCard();
+      document.getElementById('results-tab').style.display = 'inline-block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderComparison(currentScores, clarity) {
+      const comparisonCard = document.getElementById('comparison-card');
+      const comparisonSummary = document.getElementById('comparison-summary');
+      if (!comparisonCard || !comparisonSummary) return;
+
+      if (!previousAnswers) {
+        comparisonCard.style.display = 'none';
+        return;
+      }
+
+      const previousComputed = computeScoresForAnswers(previousAnswers);
+      const previousScores = previousComputed.scores;
+
+      const rows = quizData.sections.map(section => {
+        const display = getFocusAreaDisplay(section.id) || { name: section.name };
+        const current = currentScores[section.id];
+        const prev = previousScores[section.id];
+        const delta = current - prev;
+        const sign = delta > 0 ? '+' : '';
+        const color = delta > 0 ? '#D97236' : (delta < 0 ? '#6F99AF' : '#6B6B6B');
+        return `
+          <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #EEE;">
+            <span style="font-weight: 700;">${display.name}</span>
+            <span style="font-weight: 700; color: ${color};">${sign}${delta}</span>
+          </div>
+        `;
+      }).join('');
+
+      let previousStamp = '';
+      if (previousMeta && previousMeta.timestamp) {
+        const parsed = new Date(previousMeta.timestamp);
+        previousStamp = Number.isNaN(parsed.getTime())
+          ? previousMeta.timestamp
+          : parsed.toLocaleString();
+      }
+
+      comparisonSummary.innerHTML = `
+        <div style="margin-bottom: 12px; font-size: 12px; color: var(--warm-gray);">
+          Previous assessment loaded${previousStamp ? ` (${previousStamp})` : ''}.
+        </div>
+        ${rows}
+      `;
+      comparisonCard.style.display = 'block';
+    }
+
+    function updateAnswersChanged() {
+      if (!previousAnswers) {
+        answersChanged = 0;
+        return;
+      }
+
+      let changed = 0;
+      const totalIds = getAllQuestionIds();
+      totalIds.forEach(id => {
+        if (previousAnswers[id] === undefined) return;
+        if (answers[id] === undefined) return;
+        if (answers[id] !== previousAnswers[id]) changed += 1;
+      });
+      answersChanged = changed;
+    }
+
+    function updateAnswersChangedBadge() {
+      const badge = document.getElementById('answers-changed-badge');
+      if (!badge) return;
+
+      if (!previousAnswers) {
+        badge.style.display = 'none';
+        return;
+      }
+
+      const total = getAllQuestionIds().length;
+      badge.textContent = `You updated ${answersChanged} of ${total} answers`;
+      badge.style.display = 'inline-flex';
+    }
+
+    function buildQASummary() {
+      const rows = [];
+      let qNumber = 1;
+      quizData.sections.forEach(section => {
+        const visibleQuestions = getVisibleQuestions(section);
+        visibleQuestions.forEach(question => {
+          const qIndex = question._index;
+          const key = `${section.id}-${qIndex}`;
+          const value = answers[key];
+          const label = value !== undefined ? getAnswerLabel(question, value) : 'Unanswered';
+          rows.push({
+            number: qNumber,
+            section: section.name,
+            question: getQuestionText(question).replace(/<[^>]*>/g, ''),
+            answerValue: value !== undefined ? value : '',
+            answerLabel: label
+          });
+          qNumber += 1;
+        });
+      });
+
+      rows.push({
+        number: null,
+        section: 'Safety Check',
+        question: 'Blood in stool (bright red) or black/tarry stools',
+        answerValue: safetyAnswers.blood ? 'Yes' : 'No',
+        answerLabel: safetyAnswers.blood ? 'Yes' : 'No'
+      });
+      rows.push({
+        number: null,
+        section: 'Safety Check',
+        question: 'Unintentional rapid weight loss recently',
+        answerValue: safetyAnswers.weightLoss ? 'Yes' : 'No',
+        answerLabel: safetyAnswers.weightLoss ? 'Yes' : 'No'
+      });
+      rows.push({
+        number: null,
+        section: 'Safety Check',
+        question: 'An active eating disorder, or food restriction feels unsafe right now',
+        answerValue: safetyAnswers.edRisk ? 'Yes' : 'No',
+        answerLabel: safetyAnswers.edRisk ? 'Yes' : 'No'
+      });
+      rows.push({
+        number: null,
+        section: 'Safety Check',
+        question: 'Safety status',
+        answerValue: isAnySafetyChecked() ? 'Not cleared' : 'Cleared',
+        answerLabel: isAnySafetyChecked() ? 'Not cleared' : 'Cleared'
+      });
+
+      rows.push({
+        number: null,
+        section: 'Final Checks',
+        question: 'Nightshades check (joint pain)',
+        answerValue: modifierAnswers.painGate === true ? 'Yes' : 'No',
+        answerLabel: modifierAnswers.painGate === true ? 'Yes' : 'No'
+      });
+      rows.push({
+        number: null,
+        section: 'Final Checks',
+        question: 'SIBO / Low-FODMAP',
+        answerValue: modifierAnswers.sibo === true ? 'Yes' : 'No',
+        answerLabel: modifierAnswers.sibo === true ? 'Yes' : 'No'
+      });
+      rows.push({
+        number: null,
+        section: 'Final Checks',
+        question: 'Histamine / Fresh Only',
+        answerValue: flags.histamine ? `ON (${flags.histamineSource || 'explicit'})` : 'OFF',
+        answerLabel: flags.histamine ? `ON (${flags.histamineSource || 'explicit'})` : 'OFF'
+      });
+      rows.push({
+        number: null,
+        section: 'Final Checks',
+        question: 'Pace First recovery status (exercise/physical day recovery)',
+        answerValue: modifierAnswers.paceRecovery !== null ? String(modifierAnswers.paceRecovery) : '',
+        answerLabel: modifierAnswers.paceRecovery !== null ? (getAnswerLabel({ type: 'recoveryRate', optionsKey: 'recoveryRate' }, modifierAnswers.paceRecovery) || String(modifierAnswers.paceRecovery)) : ''
+      });
+      rows.push({
+        number: null,
+        section: 'Final Checks',
+        question: 'Pace First status',
+        answerValue: flags.paceFirst ? 'ON' : 'OFF',
+        answerLabel: flags.paceFirst ? 'ON' : 'OFF'
+      });
+      const bileTotal = Number(modifierAnswers.bile1 || 0) + Number(modifierAnswers.bile2 || 0) + Number(modifierAnswers.bile3 || 0);
+      rows.push({
+        number: null,
+        section: 'Final Checks',
+        question: 'Bile and fat handling: Higher-fat meals leave me nauseous/refluxy/full',
+        answerValue: modifierAnswers.bile1 !== null ? String(modifierAnswers.bile1) : '',
+        answerLabel: modifierAnswers.bile1 !== null ? String(modifierAnswers.bile1) : ''
+      });
+      rows.push({
+        number: null,
+        section: 'Final Checks',
+        question: 'Bile and fat handling: Stools often float/greasy/hard to wipe',
+        answerValue: modifierAnswers.bile2 !== null ? String(modifierAnswers.bile2) : '',
+        answerLabel: modifierAnswers.bile2 !== null ? String(modifierAnswers.bile2) : ''
+      });
+      rows.push({
+        number: null,
+        section: 'Final Checks',
+        question: 'Bile and fat handling: Worse after richer meals, better with simpler fat portions',
+        answerValue: modifierAnswers.bile3 !== null ? String(modifierAnswers.bile3) : '',
+        answerLabel: modifierAnswers.bile3 !== null ? String(modifierAnswers.bile3) : ''
+      });
+      rows.push({
+        number: null,
+        section: 'Final Checks',
+        question: 'Bile support status',
+        answerValue: `${flags.bileSupport ? 'ON' : 'OFF'} (total ${bileTotal})`,
+        answerLabel: `${flags.bileSupport ? 'ON' : 'OFF'} (total ${bileTotal})`
+      });
+      rows.push({
+        number: null,
+        section: 'Final Checks',
+        question: 'Environment flag',
+        answerValue: flags.environment ? 'ON' : 'OFF',
+        answerLabel: flags.environment ? 'ON' : 'OFF'
+      });
+      rows.push({
+        number: null,
+        section: 'Final Checks',
+        question: 'Disclaimer',
+        answerValue: 'Educational only; does not replace medical care.',
+        answerLabel: 'Educational only; does not replace medical care.'
+      });
+      return rows;
+    }
+
+    function renderQASummary() {
+      const container = document.getElementById('qa-summary-list');
+      if (!container) return;
+      container.innerHTML = '';
+      const rows = buildQASummary();
+      rows.forEach(row => {
+        const item = document.createElement('div');
+        item.style.cssText = 'padding: 12px; border: 1px solid var(--light-gray); border-radius: 12px; background: white;';
+        item.innerHTML = `
+          <div style="font-size: 12px; color: var(--warm-gray); margin-bottom: 6px;">${row.number ? `Q${row.number} • ` : ''}${row.section}</div>
+          <div style="font-size: 13px; font-weight: 700; margin-bottom: 6px;">${row.question}</div>
+          <div style="font-size: 12px; color: var(--charcoal);"><strong>${row.answerLabel}</strong> ${row.number && row.answerValue !== '' ? `(${row.answerValue})` : ''}</div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function copyQASummary() {
+      const rows = buildQASummary();
+      const lines = rows.map(row => `${row.number ? `Q${row.number} ` : ''}[${row.section}] ${row.question} — ${row.answerLabel}${row.number && row.answerValue !== '' ? ` (${row.answerValue})` : ''}`);
+      const text = lines.join('\\n');
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Q&A summary copied to clipboard.');
+      }).catch(() => {
+        alert('Unable to copy. Please select and copy manually.');
+      });
+    }
+
+    function buildProtocolSummary() {
+      if (!lastResult) return 'Results not available yet.';
+      const scores = lastResult.scores;
+      const qaRows = buildQASummary();
+
+      const primaryScore = scores[lastResult.primaryId] ?? '';
+      const mixedFlag = lastResult.mixed ? 'Yes' : 'No';
+      const mucusFlag = answers['drainage-2'] === 2 ? 'Yes' : 'No';
+
+      const carbLaneRecommendation = lastResult.mixed
+        ? '◇ Balanced for the 14-day Reset'
+        : 'Default to ◇ Balanced unless symptoms clearly indicate ▽ Lower or △ Higher';
+
+      const qaLines = qaRows.map(row => `${row.number ? `Q${row.number} ` : ''}[${row.section}] ${row.question} — ${row.answerLabel}${row.number && row.answerValue !== '' ? ` (${row.answerValue})` : ''}`);
+      const bileTotal = Number(modifierAnswers.bile1 || 0) + Number(modifierAnswers.bile2 || 0) + Number(modifierAnswers.bile3 || 0);
+      const histamineLabel = flags.histamine ? `ON (${flags.histamineSource || 'explicit'})` : 'OFF';
+      const startHere = buildStartHereSummary(lastResult.primaryId, lastResult.clarity, lastResult.mixed, lastResult.acknowledgement);
+
+      return [
+        'YOUR STARTING POINT',
+        `- Name: ${userProfile.name || ''}`,
+        `- Email: ${userProfile.email || ''}`,
+        `- Sex: ${userProfile.sex || ''}`,
+        `- Cycle: ${userProfile.cycle || ''}`,
+        `- Reset length: ${startHere.resetLabel}`,
+        `- Carb Lane: ${startHere.laneLabel}`,
+        `- Focus: ${startHere.focusLabel}`,
+        ...(startHere.focusExplainer ? [`- ${startHere.focusExplainer}`] : []),
+        `- Next step: ${startHere.nextStepText}`,
+        `- Tweaks: ${startHere.tweaksText}`,
+        `- ${startHere.week1Line}`,
+        `- Primary Focus Score: ${primaryScore}/10`,
+        `- Clarity: ${lastResult.clarity.level}`,
+        `- Mixed Focus flag: ${mixedFlag}`,
+        `- Mucus Flag: ${mucusFlag}`,
+        '',
+        'TERRAIN MAP (0–10)',
+        `- Belly: ${scores.belly ?? ''}`,
+        `- Sugar: ${scores.sugar ?? ''}`,
+        `- Sleep: ${scores.sleep ?? ''}`,
+        `- Stress: ${scores.stress ?? ''}`,
+        `- Metabolism: ${scores.metabolism ?? ''}`,
+        `- Hormones: ${scores.hormones ?? ''}`,
+        `- Drainage: ${scores.drainage ?? ''}`,
+        '',
+        'Q&A SUMMARY',
+        ...qaLines,
+        '',
+        'STARTING RULES',
+        `- Suggested Carb Lane: ${carbLaneRecommendation}`,
+        `- Nightshades (joint pain): ${flags.painGate ? 'ON' : 'OFF'}`,
+        `- SIBO / Low-FODMAP: ${flags.sibo ? 'ON' : 'OFF'}`,
+        `- Histamine / Fresh Only: ${histamineLabel}`,
+        `- Pace First: ${flags.paceFirst ? 'ON' : 'OFF'}${modifierAnswers.paceRecovery !== null ? ` (Recovery=${modifierAnswers.paceRecovery})` : ''}`,
+        `- Bile Support: ${flags.bileSupport ? 'ON' : 'OFF'} (total ${bileTotal})`,
+        `- Environment Flag: ${flags.environment ? 'ON' : 'OFF'}`,
+        '',
+        'SAFETY CHECK',
+        `- Blood in stool or black/tarry stools: ${safetyAnswers.blood ? 'Yes' : 'No'}`,
+        `- Rapid unintentional weight loss: ${safetyAnswers.weightLoss ? 'Yes' : 'No'}`,
+        `- Restriction/eating disorder unsafe: ${safetyAnswers.edRisk ? 'Yes' : 'No'}`,
+        `- Status: ${isAnySafetyChecked() ? 'Not cleared' : 'Cleared'}`,
+        '',
+        'FINAL CHECKS',
+        `- Nightshades check (joint pain): ${modifierAnswers.painGate === true ? 'Yes' : 'No'}`,
+        `- SIBO / Low-FODMAP: ${modifierAnswers.sibo === true ? 'Yes' : 'No'}`,
+        `- Histamine + source: ${histamineLabel}`,
+        `- Pace Recovery: ${modifierAnswers.paceRecovery !== null ? modifierAnswers.paceRecovery : ''}`,
+        `- Pace First: ${flags.paceFirst ? 'ON' : 'OFF'}`,
+        `- Bile item 1: ${modifierAnswers.bile1 !== null ? modifierAnswers.bile1 : ''}`,
+        `- Bile item 2: ${modifierAnswers.bile2 !== null ? modifierAnswers.bile2 : ''}`,
+        `- Bile item 3: ${modifierAnswers.bile3 !== null ? modifierAnswers.bile3 : ''}`,
+        `- Bile total: ${bileTotal} (${flags.bileSupport ? 'ON' : 'OFF'})`,
+        `- Environment flag: ${flags.environment ? 'ON' : 'OFF'}`,
+        '',
+        'Disclaimer: Educational only. This does not replace medical care.'
+      ].join('\\n');
+    }
+
+    function copyProtocolSummary() {
+      const text = buildProtocolSummary();
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Your Starting Point copied to clipboard.');
+      }).catch(() => {
+        alert('Unable to copy. Please select and copy manually.');
+      });
+    }
+
+    function saveAnswers() {
+      const ls = safeLocalStorage();
+      if (!ls) return;
+      ls.setItem('terrainResetAnswers', JSON.stringify(answers));
+      ls.setItem('terrainResetSection', currentSectionIndex);
+      saveProgress();
+    }
+
+    function saveProfile() {
+      const ls = safeLocalStorage();
+      if (!ls) return;
+      ls.setItem(STORAGE_KEY_PROFILE, JSON.stringify({
+        userProfile: getPersistableUserProfile(),
+        safetyAnswers,
+        modifierAnswers
+      }));
+    }
+
+    function loadState() {
+      const ls = safeLocalStorage();
+      if (!ls) return;
+
+      const savedProfile = ls.getItem(STORAGE_KEY_PROFILE);
+      if (savedProfile) {
+        try {
+          const parsed = JSON.parse(savedProfile);
+          const persistedProfile = parsed.userProfile ? parsed.userProfile : parsed;
+          userProfile = {
+            ...userProfile,
+            sex: persistedProfile.sex || null,
+            cycle: persistedProfile.cycle || null
+          };
+          if (parsed.safetyAnswers) {
+            safetyAnswers = { ...safetyAnswers, ...parsed.safetyAnswers };
+          }
+          if (parsed.modifierAnswers) {
+            modifierAnswers = { ...modifierAnswers, ...parsed.modifierAnswers };
+          }
+        } catch (e) {
+          // Ignore malformed local profile payloads and continue with defaults.
+        }
+      }
+
+      const previousPayload = loadPreviousAssessment();
+      if (previousPayload && previousPayload.answers) {
+        previousAnswers = previousPayload.answers;
+        previousMeta = {
+          timestamp: previousPayload.savedAt || '',
+          cycle: previousPayload.cycle || ''
+        };
+      }
+    }
+
+    function resetQuiz() {
+      if (confirm('Are you sure you want to start over? This will clear your current answers.')) {
+        answers = {};
+        currentSectionIndex = 0;
+        modifierAnswers = {
+          autoimmune: null,
+          painGate: null,
+          sibo: null,
+          histamine: null,
+          paceRecovery: null,
+          bile1: null,
+          bile2: null,
+          bile3: null,
+          environment: null
+        };
+        safetyAnswers = { blood: false, weightLoss: false, edRisk: false, none: false };
+        const ls = safeLocalStorage();
+        if (ls) {
+          ls.removeItem('terrainResetAnswers');
+          ls.removeItem('terrainResetSection');
+          ls.removeItem(STORAGE_KEY_PROGRESS);
+        }
+        hydrateSafetyInputs();
+        hydrateFinalChecksInputs();
+        updateCycleUI();
+        document.getElementById('results-tab').style.display = 'none';
+        showPage('intro');
+      }
+    }
+
+    function startQuiz() {
+      if (isAnySafetyChecked()) {
+        alert('Safety check indicates this quiz is not the right starting point.');
+        return;
+      }
+      if (!userProfile.sex) {
+        alert('Please select your sex before starting.');
+        return;
+      }
+      if (userProfile.sex === 'female' && !userProfile.cycle) {
+        alert('Please select your cycle status before starting.');
+        return;
+      }
+      saveProfileFromInputs();
+      showPage('quiz');
+      loadSection();
+    }
+
+    function showPage(pageId) {
+      document.querySelectorAll('.page-view').forEach(page => {
+        page.classList.remove('active');
+      });
+
+      document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+
+      document.getElementById(pageId + '-page').classList.add('active');
+
+      const tabMap = {
+        'intro': 0,
+        'quiz': 1,
+        'final-checks': 1,
+        'results': 2
+      };
+
+      const tabs = document.querySelectorAll('.nav-tab');
+      if (tabs[tabMap[pageId]]) {
+        tabs[tabMap[pageId]].classList.add('active');
+      }
+    }
+
+    function buildHubPayload(scores, primaryName, secondaryName, clarity) {
+      const mucusKey = getAllQuestionIds().find(id => id.startsWith('drainage-2'));
+      const mucusValue = mucusKey ? answers[mucusKey] : undefined;
+      const qaRows = buildQASummary();
+      const bileScore = Number(modifierAnswers.bile1 || 0) + Number(modifierAnswers.bile2 || 0) + Number(modifierAnswers.bile3 || 0);
+      const safetyStatus = isAnySafetyChecked() ? 'not_cleared' : 'cleared';
+      const qaFlat = {};
+      qaRows.forEach(row => {
+        if (!row.number) return;
+        qaFlat[`Q${row.number}_text`] = row.question;
+        qaFlat[`Q${row.number}_answer`] = row.answerLabel;
+        qaFlat[`Q${row.number}_value`] = row.answerValue;
+        qaFlat[`Q${row.number}_section`] = row.section;
+      });
+      return {
+        exported_at: new Date().toISOString(),
+        client_id: CLIENT_ID,
+        assessment_type: 'terrain-reset',
+        name: userProfile.name || '',
+        email: userProfile.email || '',
+        cycle: userProfile.cycle || '',
+        sex: userProfile.sex || '',
+        answers,
+        qa_rows: qaRows,
+        qa_text: qaRows.map(row => `${row.number ? `Q${row.number} ` : ''}[${row.section}] ${row.question} — ${row.answerLabel}${row.number && row.answerValue !== '' ? ` (${row.answerValue})` : ''}`),
+        qa_flat: qaFlat,
+        scores,
+        primary_focus: primaryName,
+        secondary_focus: secondaryName || '',
+        clarity: clarity.level,
+        answers_changed: answersChanged,
+        mucus_flag: mucusValue === 2,
+        safety_blood_stool: safetyAnswers.blood ? 1 : 0,
+        safety_rapid_weight_loss: safetyAnswers.weightLoss ? 1 : 0,
+        safety_eating_disorder: safetyAnswers.edRisk ? 1 : 0,
+        safety_status: safetyStatus,
+        pain_gate: flags.painGate ? 1 : 0,
+        sibo_modifier: flags.sibo ? 1 : 0,
+        histamine_modifier: flags.histamine ? 1 : 0,
+        histamine_source: flags.histamineSource || 'none',
+        pace_recovery: modifierAnswers.paceRecovery !== null ? Number(modifierAnswers.paceRecovery) : '',
+        pace_first_flag: flags.paceFirst ? 1 : 0,
+        energy_pattern_flag: answers['sugar-6'] === 2 ? 1 : 0,
+        stool_type: answers['belly-5'] !== undefined ? answers['belly-5'] : '',
+        bile_q1_fat_heavy: modifierAnswers.bile1 !== null ? Number(modifierAnswers.bile1) : '',
+        bile_q2_float_greasy: modifierAnswers.bile2 !== null ? Number(modifierAnswers.bile2) : '',
+        bile_q3_smaller_fat_better: modifierAnswers.bile3 !== null ? Number(modifierAnswers.bile3) : '',
+        bile_score: bileScore,
+        bile_flag: flags.bileSupport ? 1 : 0,
+        environment_flag: flags.environment ? 1 : 0,
+        modifierAnswers,
+        flags
+      };
+    }
+
+    async function sendResultsToHub(payload) {
+      if (!HUB_URL) return;
+      try {
+        await fetch(HUB_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify(payload)
+        });
+        console.log('Sent to Hub');
+      } catch (err) {
+        console.error('Hub send failed:', err);
+      }
+    }
+
+    function downloadPdf() {
+      if (!lastResult) {
+        alert('Results are not available yet.');
+        return;
+      }
+
+      const code = buildShortCode();
+      const startHere = buildStartHereSummary(lastResult.primaryId, lastResult.clarity, lastResult.mixed, lastResult.acknowledgement);
+      const scores = lastResult.scores || {};
+
+      const summaryHtml = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Terrain Reset - Your Starting Point</title>
+          <style>
+            body { font-family: Inter, Arial, sans-serif; background: #fff; color: #261C15; margin: 0; }
+            .page { max-width: 800px; margin: 0 auto; padding: 28px; }
+            .card { border: 2px solid #E8E8E8; border-radius: 18px; padding: 22px; }
+            h1 { margin: 0 0 4px; font-size: 30px; }
+            .sub { color: #6B6B6B; font-size: 14px; margin-bottom: 14px; }
+            .section { border: 2px solid #E8E8E8; border-radius: 14px; padding: 14px; margin-bottom: 12px; }
+            .section h2 { margin: 0 0 8px; font-size: 18px; }
+            .line { margin: 0 0 6px; font-size: 14px; }
+            .line:last-child { margin-bottom: 0; }
+            ul { margin: 0 0 0 18px; padding: 0; }
+            li { margin-bottom: 6px; }
+            .focus-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 14px; font-size: 13px; }
+            .muted { color: #6B6B6B; font-size: 12px; }
+            .footer { margin-top: 12px; color: #7A7A7A; font-size: 11px; }
+            @media print { .page { padding: 10mm; } }
+          </style>
+        </head>
+        <body>
+          <div class="page">
+            <div class="card">
+              <h1>Start Here</h1>
+              <div style="background:#EDF6F7;border:2px solid #1A535C;border-radius:12px;padding:14px 16px;margin:12px 0 18px;font-size:15px;font-weight:700;color:#1A535C;word-break:break-word;">${code}</div>
+              <div style="font-size:12px;color:#6B6B6B;margin-bottom:18px;">
+                Write this code on your My Reset Code page in the book.
+                Keep this PDF open alongside the book for your first week.
+              </div>
+              <div class="sub">Your next 14 days, simplified.</div>
+              <div class="section">
+                <h2>Your Starting Point</h2>
+                <div class="line">${startHere.introLine}</div>
+                <div class="line"><strong>Reset length:</strong> ${startHere.resetLabel}</div>
+                <div class="line"><strong>Carb Lane:</strong> ${startHere.laneLabel}</div>
+                <div class="line"><strong>Focus:</strong> ${startHere.focusLabel}</div>
+                ${startHere.focusExplainer ? `<div class="line muted">${startHere.focusExplainer}</div>` : ''}
+                <div class="line"><strong>Tweaks:</strong> ${startHere.tweaksText}</div>
+                <div class="line"><strong>Next step:</strong> ${startHere.nextStepText}</div>
+                <div class="line muted">${startHere.week1Line}</div>
+              </div>
+
+              <div class="section">
+                <h2>Today</h2>
+                <ul>
+                  <li>Start Day 1 today</li>
+                  <li>Keep meals simple and repeatable</li>
+                  <li>Do not test foods or make big changes in Phase 1</li>
+                </ul>
+              </div>
+
+              ${lastResult.mixed ? `
+              <div class="section">
+                <h2>Terrain map (FYI)</h2>
+                <div class="muted" style="margin-bottom:8px;">These 0–10 numbers come from your answers about the last 14 days. Higher numbers mean more feedback in that area. This helps explain why you landed on Mixed. These are not diagnoses, and they are not a to-do list.</div>
+                <div class="focus-grid">
+                  <div>🌿 Belly: <strong>${scores.belly ?? ''}</strong></div>
+                  <div>🍯 Sugar: <strong>${scores.sugar ?? ''}</strong></div>
+                  <div>🌙 Sleep: <strong>${scores.sleep ?? ''}</strong></div>
+                  <div>⚡ Stress: <strong>${scores.stress ?? ''}</strong></div>
+                  <div>🔥 Metabolism: <strong>${scores.metabolism ?? ''}</strong></div>
+                  <div>🌸 Hormones: <strong>${scores.hormones ?? ''}</strong></div>
+                  <div>💧 Drainage: <strong>${scores.drainage ?? ''}</strong></div>
+                </div>
+              </div>
+              ` : ''}
+
+              <div class="footer">Educational only. This does not replace medical care.</div>
+            </div>
+          </div>
+          <script>window.onload = () => window.print();<\/script>
+        </body>
+        </html>
+      `;
+
+      const w = window.open('', '_blank', 'width=900,height=1100');
+      if (!w) {
+        alert('Popup blocked. Please allow popups to print your routing summary.');
+        return;
+      }
+      w.document.open();
+      w.document.write(summaryHtml);
+      w.document.close();
+    }
+
+    function buildShortCode() {
+      if (!lastResult) return '';
+      const isMixed = lastResult.primaryId === 'mixed';
+      const s = buildStartHereSummary(
+        lastResult.primaryId,
+        lastResult.clarity,
+        isMixed,
+        lastResult.acknowledgement
+      );
+      const focusDisplay = isMixed
+        ? 'Mixed'
+        : (() => {
+          const d = getFocusAreaDisplay(lastResult.primaryId);
+          return d ? `${d.emoji} ${d.name}` : lastResult.primaryId;
+        })();
+      const tweakStr = s.tweaksText === 'None' ? 'Tweaks: None' : `Tweaks: ${s.tweaksText}`;
+      return [s.resetLabel, s.laneLabel, focusDisplay, tweakStr].join('  ·  ');
+    }
+
+    function copyShortCode() {
+      const code = buildShortCode();
+      if (!code) {
+        alert('Results not ready yet.');
+        return;
+      }
+      navigator.clipboard.writeText(code)
+        .then(() => {
+          const btn = document.getElementById('copy-code-btn');
+          if (btn) {
+            const orig = btn.textContent;
+            btn.textContent = '✓ Copied';
+            btn.style.background = 'var(--leaf-green)';
+            btn.style.color = 'white';
+            setTimeout(() => {
+              btn.textContent = orig;
+              btn.style.background = '';
+              btn.style.color = '';
+            }, 2000);
+          }
+        })
+        .catch(() => {
+          alert('Copy failed. Please select and copy the code manually.');
+        });
+    }
+
+    function renderCodeCard() {
+      const code = buildShortCode();
+      if (!code) return;
+      const existing = document.getElementById('code-card');
+      if (existing) existing.remove();
+
+      const card = document.createElement('div');
+      card.id = 'code-card';
+      card.style.cssText = `
+        background: #FFFFFF;
+        border: 3px solid #1A535C;
+        border-radius: 18px;
+        padding: 24px 28px;
+        margin-bottom: 24px;
+        box-shadow: 0 4px 20px rgba(26,83,92,0.10);
+      `;
+
+      card.innerHTML = `
+        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#6F99AF;text-transform:uppercase;margin-bottom:14px;">Your Reset Code</div>
+        <div id="code-display" style="font-size:17px;font-weight:700;color:#1A535C;line-height:1.6;background:#EDF6F7;border-radius:12px;padding:16px 18px;margin-bottom:20px;word-break:break-word;">${code}</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+          <button id="copy-code-btn" onclick="copyShortCode()" style="padding:12px 20px;background:#1A535C;color:white;border:none;border-radius:12px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;transition:all 0.2s;">
+            Copy My Code
+          </button>
+          <button onclick="downloadPdf()" style="padding:12px 20px;background:white;color:#1A535C;border:2px solid #1A535C;border-radius:12px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;">
+            Save as PDF
+          </button>
+          <button onclick="downloadQuickStartCard()" style="padding:12px 20px;background:white;color:#6B8F71;border:2px solid #6B8F71;border-radius:12px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;" title="Half-page card for the fridge">
+            🖨 Print kitchen card
+          </button>
+        </div>
+        <div id="book-bridge" style="margin-top:20px;padding:14px 16px;background:#F0F5F1;border-radius:12px;font-size:14px;color:#2D2D2D;border:1.5px solid #6B8F71;">
+          <strong style="color:#1A535C;">Have the Terrain Reset book?</strong>
+          Write this code on your My Reset Code page (near the front of the book),
+          then go to Day 1. Your code tells you which column to follow
+          and which pages to pay attention to.
+        </div>
+      `;
+
+      const hero = document.querySelector('.results-hero');
+      if (hero && hero.parentNode) {
+        hero.parentNode.insertBefore(card, hero.nextSibling);
+      }
+    }
+
+    function downloadQuickStartCard() {
+      if (!lastResult) {
+        alert('Results not ready yet.');
+        return;
+      }
+
+      const code = buildShortCode();
+      const isMixed = lastResult.primaryId === 'mixed';
+      const startHere = buildStartHereSummary(
+        lastResult.primaryId,
+        lastResult.clarity,
+        isMixed,
+        lastResult.acknowledgement
+      );
+
+      const laneKey = getRecommendedCarbLane(lastResult.primaryId, lastResult.clarity);
+      const plateLookup = {
+        lower: 'Protein: generous palm - do not skimp.  ·  Veg: fill the rest, warm and cooked.  ·  Starch: half cup or less at lunch and dinner. None at breakfast.',
+        balanced: 'Protein: palm-sized.  ·  Veg: generous alongside.  ·  Starch: 1 cup at lunch and dinner. Small amount at breakfast if wanted.',
+        higher: 'Protein: palm-sized.  ·  Veg: generous alongside the starch.  ·  Starch: 1.5 to 2 cups at each meal. Biggest portion at dinner.'
+      };
+      const plateLines = plateLookup[laneKey] || plateLookup.balanced;
+
+      const focusPointerLookup = {
+        belly: 'Week 1: Cooked, Warm, Moist (Foundation 3). All veg cooked and soft.',
+        sugar: 'Week 1: Feed the Morning (Foundation 6). Protein within 45 min of waking. No sweet breakfast.',
+        sleep: 'Week 1: Light Bookends (Foundation 1). Morning daylight + dim lights 2 hrs before bed.',
+        stress: 'Week 1: Feed the Morning (Foundation 6) + Walk and Lift (Foundation 7). Keep exercise gentle.',
+        metabolism: 'Week 1: Cooked, Warm, Moist (Foundation 3) + Repeat Meals (Foundation 4).',
+        hormones: 'Week 1: Pee, Poop, Sweat (Foundation 6). Sluggish elimination blurs hormonal feedback.',
+        drainage: 'Week 1: Walk and Lift (Foundation 7) + Eat Your Water (Foundation 2).',
+        mixed: 'Week 1: All 8 Daily Foundations, one per day. No extras until Week 2.'
+      };
+      const focusPointer = focusPointerLookup[lastResult.primaryId] || focusPointerLookup.mixed;
+
+      const focusDisplay = isMixed
+        ? 'Mixed'
+        : (() => {
+          const d = getFocusAreaDisplay(lastResult.primaryId);
+          return d ? `${d.emoji} ${d.name}` : lastResult.primaryId;
+        })();
+
+      const tweaksActive = startHere.tweaksText !== 'None';
+      const tweakHtml = tweaksActive
+        ? `<div class="section"><span class="lbl">Tweaks active</span><span class="val" style="color:#A59C94;font-weight:700;">${startHere.tweaksText}</span></div>`
+        : '';
+
+      const html = `<!DOCTYPE html>
+      <html lang="en"><head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>Terrain Reset Quick Start Card</title>
+      <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:Inter,-apple-system,Arial,sans-serif;background:#fff;color:#2D2D2D;padding:24px;}
+        .card{max-width:560px;margin:0 auto;border:3px solid #1A535C;border-radius:20px;overflow:hidden;}
+        .hdr{background:#1A535C;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;}
+        .hdr-title{color:#fff;font-size:13px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;}
+        .hdr-sub{color:rgba(255,255,255,.6);font-size:11px;}
+        .code-band{background:#EDF6F7;padding:14px 22px;font-size:13px;font-weight:700;color:#1A535C;line-height:1.55;border-bottom:2px solid #D0E8EA;word-break:break-word;}
+        .section{padding:14px 22px;border-bottom:1.5px solid #EEEEEE;}
+        .section:last-of-type{border-bottom:none;}
+        .lbl{display:block;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#6F99AF;margin-bottom:6px;}
+        .val{font-size:13px;color:#2D2D2D;line-height:1.55;display:block;}
+        .rule{background:#FEF7EC;padding:12px 22px;font-size:13px;font-weight:700;color:#C47D0E;border-top:1.5px solid #F5DFA8;border-bottom:1.5px solid #F5DFA8;}
+        .safety{padding:10px 22px;font-size:11px;color:#999;}
+        .hint{text-align:center;margin-top:16px;font-size:11px;color:#AAAAAA;}
+        @media print{body{padding:0;}.card{border-radius:0;border-width:2px;}.hint{display:none;}}
+      </style></head><body>
+      <div class="card">
+        <div class="hdr">
+          <span class="hdr-title">🌿 Terrain Reset - Quick Start Card</span>
+          <span class="hdr-sub">Days 1-14</span>
+        </div>
+        <div class="code-band">${code}</div>
+        <div class="section">
+          <span class="lbl">Your plate (${startHere.laneLabel})</span>
+          <span class="val">${plateLines}</span>
+        </div>
+        <div class="section">
+          <span class="lbl">Your focus this week</span>
+          <span class="val"><strong>${focusDisplay}</strong><br>${focusPointer}</span>
+        </div>
+        ${tweakHtml}
+        <div class="rule">No naked carbs. Pair everything starchy or sweet with protein and fat.</div>
+        <div class="safety">Something feels wrong? Pause and turn to Chapter 11.</div>
+      </div>
+      <div class="hint">Print this card and keep it on the fridge or inside a kitchen cupboard.</div>
+      <script>window.onload=()=>window.print();<\/script>
+      </body></html>`;
+
+      const w = window.open('', '_blank', 'width=680,height=820');
+      if (!w) {
+        alert('Popup blocked. Please allow popups to print your Quick Start Card.');
+        return;
+      }
+      w.document.open();
+      w.document.write(html);
+      w.document.close();
+    }
+
+    async function registerServiceWorker() {
+      if (!('serviceWorker' in navigator)) return;
+      try {
+        await navigator.serviceWorker.register('./service-worker.js');
+      } catch (err) {
+        console.warn('Service worker registration failed', err);
+      }
+    }
+
+    function printSymbolKey() {
+      const source = document.getElementById('symbol-key-card');
+      if (!source) return;
+      const printableHtml = source.innerHTML.replace(
+        '<div class="download-buttons">\n          <button class="btn btn-secondary" type="button" onclick="printSymbolKey()">Print Symbol Key</button>\n        </div>',
+        ''
+      );
+      const printWin = window.open('', '_blank', 'width=900,height=1100');
+      if (!printWin) {
+        window.print();
+        return;
+      }
+      printWin.document.open();
+      printWin.document.write(`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Symbol Key</title>
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+          <style>
+            body { font-family: Inter, sans-serif; background: #FFFFFF; color: #261C15; margin: 0; }
+            .wrap { max-width: 760px; margin: 0 auto; padding: 28px; }
+            .card { border: 2px solid #E8E8E8; border-radius: 18px; padding: 22px; background: #FFFFFF; }
+            .title { font-size: 28px; font-weight: 800; margin: 0 0 8px; }
+            .sub { font-size: 13px; color: #6B6B6B; margin: 0 0 14px; }
+            .row { border: 2px solid #E8E8E8; border-radius: 14px; padding: 14px; margin: 0 0 10px; }
+            .row:last-child { margin-bottom: 0; }
+            h4 { margin: 0 0 8px; font-size: 12px; letter-spacing: 0.8px; text-transform: uppercase; color: #6F99AF; }
+            p { margin: 0 0 6px; font-size: 14px; line-height: 1.45; }
+            .muted { font-size: 12px; color: #6B6B6B; }
+            .wash { background: rgba(165, 156, 148, 0.16); border: 2px solid rgba(165, 156, 148, 0.55); border-radius: 12px; padding: 10px 12px; margin-top: 8px; }
+            @media print { .wrap { padding: 12mm; } }
+          </style>
+        </head>
+        <body>
+          <div class="wrap">
+            <div class="card">${printableHtml}</div>
+          </div>
+          <script>window.onload = () => { window.print(); };<\/script>
+        </body>
+        </html>
+      `);
+      printWin.document.close();
+    }
+
+    function scrollToCarbLanes() {
+      const section = document.getElementById('carb-lanes-section');
+      if (!section) return;
+      const header = document.querySelector('.header');
+      const headerOffset = header ? header.getBoundingClientRect().height : 0;
+      const extraOffset = 20;
+      const y = section.getBoundingClientRect().top + window.pageYOffset - headerOffset - extraOffset;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+    }
+
+    function formatCalendarDate(date) {
+      const y = date.getUTCFullYear();
+      const m = String(date.getUTCMonth() + 1).padStart(2, '0');
+      const d = String(date.getUTCDate()).padStart(2, '0');
+      return `${y}${m}${d}`;
+    }
+
+    function formatICSDateTime(date) {
+      const y = date.getUTCFullYear();
+      const m = String(date.getUTCMonth() + 1).padStart(2, '0');
+      const d = String(date.getUTCDate()).padStart(2, '0');
+      const hh = String(date.getUTCHours()).padStart(2, '0');
+      const mm = String(date.getUTCMinutes()).padStart(2, '0');
+      const ss = String(date.getUTCSeconds()).padStart(2, '0');
+      return `${y}${m}${d}T${hh}${mm}${ss}Z`;
+    }
+
+    function getRecheckReminderEvent() {
+      const start = new Date();
+      start.setDate(start.getDate() + 14);
+      start.setHours(9, 0, 0, 0);
+      const end = new Date(start.getTime() + (30 * 60 * 1000));
+      return {
+        title: 'Terrain Reset Re-check',
+        description: 'Re-take your Terrain Reset assessment and review your starting point.',
+        start,
+        end
+      };
+    }
+
+    function openGoogleRecheckReminder() {
+      const evt = getRecheckReminderEvent();
+      const start = formatICSDateTime(evt.start);
+      const end = formatICSDateTime(evt.end);
+      const params = new URLSearchParams({
+        action: 'TEMPLATE',
+        text: evt.title,
+        dates: `${start}/${end}`,
+        details: evt.description
+      });
+      window.open(`https://calendar.google.com/calendar/render?${params.toString()}`, '_blank');
+    }
+
+    function downloadICSRecheckReminder() {
+      const evt = getRecheckReminderEvent();
+      const uid = `terrain-reset-recheck-${Date.now()}@terraincode.com`;
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Terrain Code//Terrain Reset Quiz//EN',
+        'CALSCALE:GREGORIAN',
+        'BEGIN:VEVENT',
+        `UID:${uid}`,
+        `DTSTAMP:${formatICSDateTime(new Date())}`,
+        `DTSTART:${formatICSDateTime(evt.start)}`,
+        `DTEND:${formatICSDateTime(evt.end)}`,
+        `SUMMARY:${evt.title}`,
+        `DESCRIPTION:${evt.description.replace(/\\n/g, '\\\\n')}`,
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'terrain-reset-recheck-day-14.ics';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function setRecheckReminder() {
+      const googleFirst = confirm('Add Day 14 Re-check Reminder:\\n\\nOK = Google Calendar\\nCancel = Apple/Outlook (.ics)');
+      if (googleFirst) {
+        openGoogleRecheckReminder();
+        return;
+      }
+      const useICS = confirm('Download an .ics reminder file for Apple Calendar / Outlook?');
+      if (useICS) {
+        downloadICSRecheckReminder();
+      }
+    }
+
+    // Initialize on load
+    init();
+    registerServiceWorker();
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "Terrain Reset Assessment",
+  "short_name": "TR Quiz",
+  "description": "Find your Focus Area and Carb Lane for the Terrain Reset protocol.",
+  "id": "/Terrain-Reset-Quiz/",
+  "start_url": "/Terrain-Reset-Quiz/TR-Quiz.html",
+  "scope": "/Terrain-Reset-Quiz/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#1A535C",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
