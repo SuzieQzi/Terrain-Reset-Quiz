@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -199,6 +200,30 @@
       color: var(--chlorophyll);
     }
 
+    .recognition-intro {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(111, 153, 175, 0.2);
+    }
+
+    .recognition-intro p {
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: var(--charcoal);
+    }
+
+    .recognition-intro p:last-child {
+      margin-bottom: 0;
+    }
+
+    .recognition-tagline {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--soil-brown);
+    }
+
     /* Progress Bar */
     .progress-section {
       margin-bottom: 32px;
@@ -388,7 +413,7 @@
     }
 
     .progress-meta {
-      display: none;
+      display: flex;
       justify-content: space-between;
       margin-top: 8px;
       font-size: 12px;
@@ -626,6 +651,45 @@
       font-size: 12px;
       color: var(--charcoal);
       max-width: 100%;
+    }
+
+    .signal-notes-card {
+      display: none;
+      background: #FFFFFF;
+      border: 2px solid rgba(111, 153, 175, 0.22);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .signal-notes-card h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--chlorophyll);
+      margin-bottom: 8px;
+    }
+
+    .signal-notes-card p {
+      font-size: 13px;
+      color: var(--warm-gray);
+      margin-bottom: 10px;
+    }
+
+    .signal-notes-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .signal-note {
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--bg-light);
+      font-size: 12px;
+      color: var(--charcoal);
+      line-height: 1.45;
+    }
+
+    .signal-note strong {
+      color: #4C4C4C;
     }
     .persist-bar {
       display: none;
@@ -954,6 +1018,47 @@
       margin-bottom: 14px;
     }
 
+    .focus-support-line {
+      margin-top: -4px;
+      margin-bottom: 14px;
+      font-size: 12px;
+      color: var(--warm-gray);
+    }
+
+    .focus-recognition-card {
+      margin: 16px 0 12px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: var(--bg-light);
+      border: 1px solid rgba(111, 153, 175, 0.18);
+    }
+
+    .focus-recognition-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #4C4C4C;
+      margin-bottom: 6px;
+    }
+
+    .focus-recognition-oneliner {
+      font-size: 14px;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+    }
+
+    .focus-recognition-body {
+      font-size: 13px;
+      color: var(--warm-gray);
+      margin-bottom: 8px;
+    }
+
+    .focus-recognition-includes,
+    .focus-recognition-tweak {
+      font-size: 12px;
+      color: var(--charcoal);
+      margin-top: 6px;
+    }
+
     .plan-line-grid {
       display: grid;
       gap: 8px;
@@ -1199,6 +1304,106 @@
       margin: 6px 0 10px 32px;
     }
 
+    .area-recognition {
+      margin: 8px 0 10px 32px;
+      font-size: 12px;
+      color: var(--charcoal);
+      line-height: 1.45;
+    }
+
+    .area-recognition strong {
+      color: #4C4C4C;
+    }
+
+    .focus-chooser-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .focus-chooser-card {
+      padding: 16px;
+      border-radius: 12px;
+      background: var(--bg-light);
+      border: 1px solid rgba(111, 153, 175, 0.12);
+    }
+
+    .focus-chooser-title {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .focus-chooser-descriptor {
+      font-size: 12px;
+      color: var(--warm-gray);
+      margin-bottom: 8px;
+    }
+
+    .focus-chooser-copy,
+    .focus-chooser-conditions {
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--charcoal);
+    }
+
+    .focus-chooser-conditions {
+      margin-top: 8px;
+      color: var(--warm-gray);
+    }
+
+    .issue-fit-details {
+      border: 1px solid rgba(111, 153, 175, 0.18);
+      border-radius: 14px;
+      background: var(--bg-light);
+      padding: 14px 16px;
+    }
+
+    .issue-fit-details summary {
+      cursor: pointer;
+      font-weight: 800;
+      color: #4C4C4C;
+      list-style: none;
+    }
+
+    .issue-fit-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .issue-fit-intro,
+    .issue-fit-closing {
+      font-size: 13px;
+      color: var(--warm-gray);
+      margin-top: 10px;
+    }
+
+    .issue-fit-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .issue-fit-item {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #FFFFFF;
+      border: 1px solid rgba(111, 153, 175, 0.14);
+    }
+
+    .issue-fit-item strong {
+      display: block;
+      font-size: 13px;
+      color: var(--charcoal);
+      margin-bottom: 4px;
+    }
+
+    .issue-fit-route {
+      font-size: 12px;
+      color: var(--warm-gray);
+      line-height: 1.45;
+    }
+
     .area-score {
       font-size: 20px;
       font-weight: 800;
@@ -1356,6 +1561,11 @@
       #all-areas {
         grid-template-columns: 1fr;
       }
+
+      .focus-recognition-card,
+      .issue-fit-details {
+        padding: 14px;
+      }
     }
 
     @media print {
@@ -1437,8 +1647,12 @@
     <!-- Intro Page -->
     <div id="intro-page" class="page-view active">
       <div class="quiz-intro">
-        <h2>Find Your Week 1 Quick Start</h2>
-        <p>This questionnaire will help identify your primary wellness focus area and create a personalized plan for your 14-day journey.</p>
+        <h2>Find your Terrain Reset starting point</h2>
+        <p>Most chronic issues have different names, but underneath them the body is often carrying too much, recovering too little, and trying to sort too many competing inputs at once.</p>
+        <p>This quiz helps you see where that strain is taking up the most room right now, so you know where to start.</p>
+        <div class="recognition-intro">
+          <p class="recognition-tagline">The label tells you where the body is speaking. The terrain tells you why it keeps needing to.</p>
+        </div>
         
         <div class="instructions">
           <h3>📋 How to Answer</h3>
@@ -1453,7 +1667,7 @@
       <div class="form-card safety-card" id="safety-card">
         <h3>Quick Safety Check</h3>
         <p style="color: var(--warm-gray); font-size: 14px; margin-top: 4px;">
-          This reset is designed for everyday symptoms and patterns, not urgent or complex medical situations.
+          This reset is for everyday body clues that have been hanging around, not urgent medical situations.
         </p>
         <div class="safety-list">
           <label class="safety-item">
@@ -1475,7 +1689,7 @@
         </div>
         <div class="safety-stop" id="safety-stop-message">
           <strong>Pause here.</strong><br>
-          Based on what you selected, this quiz and protocol are not the right starting point. Please reach out to a qualified medical provider before making dietary changes.
+          What you selected needs a medical route first. Please reach out to a qualified medical provider before making dietary changes.
           <button class="safety-clear" type="button" onclick="clearSafetyAnswers()">Clear selections and continue</button>
         </div>
       </div>
@@ -1528,43 +1742,8 @@
 
       <div style="background: white; border: 2px solid var(--light-gray); border-radius: 16px; padding: 24px;">
         <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">You'll find out which of these are your Focus Area/s</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px;">
-          <div style="padding: 16px; border-radius: 12px; background: var(--bg-light);">
-            <div style="font-size: 24px; margin-bottom: 6px;">🌿</div>
-            <div style="font-size: 14px; font-weight: 800;">Belly</div>
-            <div style="font-size: 12px; color: var(--warm-gray); margin-top: 4px;">Digestion & Comfort</div>
-          </div>
-          <div style="padding: 16px; border-radius: 12px; background: var(--bg-light);">
-            <div style="font-size: 24px; margin-bottom: 6px;">🍯</div>
-            <div style="font-size: 14px; font-weight: 800;">Sugar</div>
-            <div style="font-size: 12px; color: var(--warm-gray); margin-top: 4px;">Blood Sugar Stability</div>
-          </div>
-          <div style="padding: 16px; border-radius: 12px; background: var(--bg-light);">
-            <div style="font-size: 24px; margin-bottom: 6px;">🌙</div>
-            <div style="font-size: 14px; font-weight: 800;">Sleep</div>
-            <div style="font-size: 12px; color: var(--warm-gray); margin-top: 4px;">Sleep & Energy</div>
-          </div>
-          <div style="padding: 16px; border-radius: 12px; background: var(--bg-light);">
-            <div style="font-size: 24px; margin-bottom: 6px;">⚡</div>
-            <div style="font-size: 14px; font-weight: 800;">Stress</div>
-            <div style="font-size: 12px; color: var(--warm-gray); margin-top: 4px;">Stress & Nervous System</div>
-          </div>
-          <div style="padding: 16px; border-radius: 12px; background: var(--bg-light);">
-            <div style="font-size: 24px; margin-bottom: 6px;">🔥</div>
-            <div style="font-size: 14px; font-weight: 800;">Metabolism</div>
-            <div style="font-size: 12px; color: var(--warm-gray); margin-top: 4px;">Metabolism & Energy</div>
-          </div>
-          <div style="padding: 16px; border-radius: 12px; background: var(--bg-light);">
-            <div style="font-size: 24px; margin-bottom: 6px;">🌸</div>
-            <div style="font-size: 14px; font-weight: 800;">Hormones</div>
-            <div style="font-size: 12px; color: var(--warm-gray); margin-top: 4px;">Hormones & Mood</div>
-          </div>
-          <div style="padding: 16px; border-radius: 12px; background: var(--bg-light);">
-            <div style="font-size: 24px; margin-bottom: 6px;">💧</div>
-            <div style="font-size: 14px; font-weight: 800;">Drainage</div>
-            <div style="font-size: 12px; color: var(--warm-gray); margin-top: 4px;">Elimination & Detox</div>
-          </div>
-        </div>
+        <div class="focus-chooser-grid" id="focus-area-preview-grid"></div>
+        <p style="font-size: 12px; color: var(--warm-gray); margin-top: 12px;">If more than one feels equally true, the quiz may return Mixed.</p>
       </div>
 
     </div>
@@ -1623,7 +1802,7 @@
       <div class="final-checks-grid">
         <div class="final-check-group">
           <h3 style="font-size: 16px; color: var(--chlorophyll); margin-bottom: 8px;">Autoimmune (clinician diagnosed or strongly suspected)</h3>
-          <p style="font-size: 14px; color: var(--warm-gray);">If autoimmune is in the picture, we use a longer runway (Deep Reset, 30 days) to reduce variables and keep feedback clearer.</p>
+          <p style="font-size: 14px; color: var(--warm-gray);">If autoimmune is in the picture, Deep Reset gives the body a longer, simpler runway: 30 days, fewer moving parts, easier to tell what helps.</p>
           <div class="modifier-row" id="modifier-autoimmune"></div>
         </div>
 
@@ -1691,7 +1870,10 @@
           <h3 id="focus-card-heading">Assessment Snapshot</h3>
         </div>
         <p class="focus-intro-line" id="focus-intro-line">
-          This is your Focus Area for Phase 1. Keep it simple and let the feedback get clearer.
+          This is your Focus Area for Phase 1. Keep it simple and let the picture settle.
+        </p>
+        <p class="focus-support-line" id="focus-support-line">
+          A named issue can sit across more than one Focus Area. This result gives you the first place to work, not the whole story.
         </p>
         <div class="plan-line-grid">
           <div id="plan-reset-line"><strong>Reset length:</strong> ↺ Reset (14 days)</div>
@@ -1701,6 +1883,13 @@
           <div id="plan-tweaks-line"><strong>Tweaks:</strong> None</div>
           <div id="plan-next-step-line"><strong>Next step:</strong> Go to Day 1.</div>
           <div class="plan-line-note">Week 1 adds the 8 Daily Foundations one by one. Once you add one, keep it.</div>
+        </div>
+        <div class="focus-recognition-card" id="focus-recognition-card" style="display:none;">
+          <div class="focus-recognition-title" id="focus-recognition-title"></div>
+          <div class="focus-recognition-oneliner" id="focus-recognition-oneliner"></div>
+          <div class="focus-recognition-body" id="focus-recognition-body"></div>
+          <div class="focus-recognition-includes" id="focus-recognition-includes"></div>
+          <div class="focus-recognition-tweak" id="focus-recognition-tweak" style="display:none;"></div>
         </div>
         <div class="download-buttons" style="margin-top: 8px;">
           <button class="btn btn-primary" type="button" onclick="scrollToCarbLanes()">View Carb Lane details</button>
@@ -1719,6 +1908,19 @@
 
       <div class="support-section" id="support-section">
         <div class="flag-row" id="flag-row"></div>
+        <div class="signal-notes-card" id="signal-notes-card">
+          <h3>Worth Not Missing</h3>
+          <p>Some answers matter even when they do not become your main result.</p>
+          <div class="signal-notes-list" id="signal-notes-list"></div>
+        </div>
+        <div class="issue-fit-details">
+          <details id="issue-fit-details">
+            <summary>Where your issue usually fits</summary>
+            <p class="issue-fit-intro">Use these as landmarks inside the same Terrain Reset plan.</p>
+            <div class="issue-fit-list" id="issue-fit-list"></div>
+            <p class="issue-fit-closing">If your issue is not listed here, start with the Focus Area that matches the symptom taking up the most room.</p>
+          </details>
+        </div>
       </div>
 
       <div class="area-breakdown">
@@ -1744,7 +1946,7 @@
       <div class="area-breakdown" id="carb-lanes-section">
         <h3>Carb Lanes (Starch Dial)</h3>
         <p style="font-size: 13px; color: var(--warm-gray); margin-bottom: 16px;">
-          Your Carb Lane is not a diet identity. It is a starting setting for your current terrain.
+          Your Carb Lane is a starting setting for your current terrain.
         </p>
         <div style="display: grid; gap: 12px;">
           <div class="carb-lane-card" id="carb-lane-lower">
@@ -1783,7 +1985,7 @@
         </div>
         <div class="carb-lane-guardrail" id="carb-lane-higher-guardrail">
           <h4 id="carb-lane-guardrail-heading">Higher may fit you</h4>
-          <p id="carb-lane-guardrail-body">Your answers suggest flat, cold, or under-fuel signals. If you feel better with more starch, add 1/2 cup at dinner for 2-3 days, keep added fat modest, then reassess.</p>
+          <p id="carb-lane-guardrail-body">Your answers point to flat, cold, or under-fed days. If you feel better with more starch, add 1/2 cup at dinner for 2-3 days, keep added fat modest, then reassess.</p>
           <p id="carb-lane-guardrail-underfuel" style="margin-top:8px;">If low carb has ever made you feel colder, flatter, or sleep worse, start your starch at dinner and increase by 1/2 cup every 2-3 days if steadier.</p>
         </div>
       </div>
@@ -1910,9 +2112,87 @@
     const PROGRESS_TTL_MS = 30 * 24 * 60 * 60 * 1000;
     const START_HERE_NEXT_STEP = 'Go to Day 1.';
     const START_HERE_WEEK1_LINE = 'Week 1 adds the 8 Daily Foundations one by one. Once you add one, keep it.';
-    const START_HERE_MIXED_EXPLAINER = 'Mixed means no single clear area for you to focus on yet. Follow Day 1 to Day 14 in order.';
-    const START_HERE_MIXED_INTRO = 'Your Focus Area is Mixed. That just means there isn’t one clear area to focus on yet.';
-    const START_HERE_SINGLE_INTRO = 'This is your Focus Area for Phase 1. Keep it simple and let the feedback get clearer.';
+    const START_HERE_MIXED_EXPLAINER = 'Let the 8 Daily Foundations carry the first stretch. If Sleep or Stress is clearly taking up the most room, start there.';
+    const START_HERE_MIXED_INTRO = 'Your result is Mixed. More than one part of the picture is asking for attention at the same time.';
+    const START_HERE_SINGLE_INTRO = 'Your result gives you a place to begin.';
+    const START_HERE_SUPPORT_LINE = 'It points to where things are taking up the most room right now, so you know what to read first and where to put your effort.';
+    const START_HERE_OPTIONAL_SUPPORT = 'A named issue can sit across more than one Focus Area. This result gives you the first place to work, not the whole story.';
+
+    const focusAreaRecognitionMap = {
+      belly: {
+        title: '🌿 Belly',
+        shortLabel: 'When digestion is taking up the most room',
+        oneLiner: 'Meals that used to be fine are suddenly not fine.',
+        body: 'Bloating, reflux, bowel swings, or food reactions are taking up too much space.',
+        includes: ['bloating', 'IBS-style symptoms', 'SIBO-style symptoms', 'reflux', 'food reactions'],
+        tweakNote: '🎈 Bloat, if bloating is the symptom you keep planning your day around.'
+      },
+      sugar: {
+        title: '🍯 Sugar',
+        shortLabel: 'When cravings and crashes are running too much of the day',
+        oneLiner: 'Energy dips after meals. Hunger feels urgent.',
+        body: 'The afternoon starts negotiating with you before you have had a chance to think.',
+        includes: ['cravings', 'energy crashes', 'reactive hypoglycaemia', 'insulin resistance', 'prediabetes', 'some PCOS patterns']
+      },
+      hormones: {
+        title: '🌸 Hormones',
+        shortLabel: 'When your hormones feel off and the rest of your body is following',
+        oneLiner: 'Things feel less predictable than they used to.',
+        body: 'Cycle shifts, PMS, hormonal skin changes, hot flashes, or hormone-linked weight changes are part of the picture.',
+        includes: ['PMS', 'cycle irregularity', 'perimenopause', 'acne', 'PCOS', 'endometriosis', 'fibroids']
+      },
+      metabolism: {
+        title: '🔥 Metabolism',
+        shortLabel: 'When you are doing the right things and not getting the result you expect',
+        oneLiner: 'The body feels stuck.',
+        body: 'Weight is resistant. Energy feels flatter than it should. Recovery is slower. It can feel like your system is running with the brakes partly on.',
+        includes: ['stubborn weight', 'metabolic resistance', 'thyroid issues', 'Hashimoto’s context', 'cold hands and feet', 'flat energy', 'slow recovery']
+      },
+      sleep: {
+        title: '🌙 Sleep',
+        shortLabel: 'When you are tired all day and wired at the wrong times',
+        oneLiner: 'Sleep is light, broken, or not doing its job.',
+        body: 'You wake too early, wake in the night, or never really feel restored.',
+        includes: ['broken sleep', 'waking at 2 to 3am', 'non-restorative sleep', 'tired but wired']
+      },
+      stress: {
+        title: '⚡ Stress',
+        shortLabel: 'When the system feels overrun and recovery is not keeping up',
+        oneLiner: 'You are still functioning, but the margin is gone.',
+        body: 'Energy feels borrowed. Your threshold is lower. Everything takes more out of you.',
+        includes: ['burnout', 'chronic anxiety', 'wired but tired', 'everything taking more out of you', 'post-viral fatigue']
+      },
+      drainage: {
+        title: '💧 Drainage',
+        shortLabel: 'When things feel heavy, puffy, or stuck',
+        oneLiner: 'The body feels congested underneath.',
+        body: 'Puffiness, sluggish bowels, headaches, skin congestion, or that dense heavy feeling can all point here.',
+        includes: ['fluid retention', 'puffiness', 'sluggish bowels', 'headaches', 'skin congestion', 'heavy or stuck feeling']
+      },
+      mixed: {
+        title: 'Mixed',
+        shortLabel: 'When more than one part of the picture is loud at once',
+        oneLiner: 'You did not get it wrong.',
+        body: 'This usually means the overall load is high enough that the picture is blurred across the system rather than concentrated in one place.',
+        includes: [],
+        tweakNote: 'Let the 8 Daily Foundations do the heavy lifting first. If Sleep or Stress is clearly louder than everything else, start there.'
+      }
+    };
+
+    const conditionRoutingMap = [
+      { label: 'Acne', routesTo: ['🌸 Hormones', '🍯 Sugar', '💧 Drainage'] },
+      { label: 'PCOS', routesTo: ['🌸 Hormones', '🍯 Sugar', '🔥 Metabolism'] },
+      { label: 'Endometriosis', routesTo: ['🌸 Hormones', '🌿 Belly', '💧 Drainage'] },
+      { label: 'Thyroid / Hashimoto’s', routesTo: ['🔥 Metabolism', '🌸 Hormones', '🌙 Sleep'] },
+      { label: 'Joint pain / inflammatory pain', routesTo: ['🌶️ Nightshades if pain is active', '💧 Drainage', '🔥 Metabolism'] },
+      { label: 'Skin conditions', routesTo: ['🐝 Reactivity', '💧 Drainage', '🌸 Hormones'] },
+      { label: 'Perimenopause / PMS / cycle irregularity', routesTo: ['🌸 Hormones', '🍯 Sugar', '💧 Drainage'] },
+      { label: 'Stubborn weight / metabolic resistance', routesTo: ['🔥 Metabolism', '🍯 Sugar', '⚡ Stress'] },
+      { label: 'Fatigue / wired but tired / post-viral fatigue', routesTo: ['⚡ Stress', '🌙 Sleep', '💧 Drainage'] },
+      { label: 'Low mood / anxious-wired patterns', routesTo: ['⚡ Stress', '🌙 Sleep', '🌿 Belly'] },
+      { label: 'Bloating / IBS-style symptoms / SIBO', routesTo: ['🌿 Belly', '🎈 Bloat'] },
+      { label: 'Histamine reactivity / “I react to everything”', routesTo: ['🐝 Reactivity'] }
+    ];
 
     const answerOptionSets = {
       frequency: [
@@ -2169,8 +2449,12 @@
       }
 
       const payload = serializeProgress();
-      ls.setItem(STORAGE_KEY_PROGRESS, JSON.stringify(payload));
-      renderPersistBar(payload, { mode: 'saved' });
+      try {
+        ls.setItem(STORAGE_KEY_PROGRESS, JSON.stringify(payload));
+        renderPersistBar(payload, { mode: 'saved' });
+      } catch (e) {
+        // Storage quota exceeded – progress not saved but quiz continues
+      }
     }
 
     function loadSavedProgress() {
@@ -2328,6 +2612,8 @@
     // Initialize
     function init() {
       createSectionDots();
+      renderFocusAreaPreviewCards();
+      renderConditionRoutingList();
       renderFinalChecksControls();
       loadState();
       hydrateSafetyInputs();
@@ -2940,7 +3226,7 @@
 
       const badgeItems = [];
       if (flags.paceFirst) {
-        badgeItems.push('<strong>PACE FIRST</strong><br>For the next 14 days, keep it gentle. Aim for steadier days and clearer feedback. Skip fasting experiments and cold plunges for now.');
+        badgeItems.push('<strong>PACE FIRST</strong><br>For the next 14 days, keep it gentle. Aim for steadier days and a calmer read on what helps. Skip fasting experiments and cold plunges for now.');
       }
       if (flags.painGate) {
         badgeItems.push('<strong>🌶️ NIGHTSHADES</strong><br>Joint pain is active. Exclude nightshades for 14 days (potato, tomato, peppers, eggplant). Use swaps like sweet potato, cassava, taro.');
@@ -2976,6 +3262,211 @@
       return map[sectionId] || null;
     }
 
+    function getFocusRecognition(sectionId) {
+      return focusAreaRecognitionMap[sectionId] || null;
+    }
+
+    function formatRecognitionIncludes(includes) {
+      if (!Array.isArray(includes) || includes.length === 0) return '';
+      return includes.join(', ');
+    }
+
+    function renderFocusAreaPreviewCards() {
+      const container = document.getElementById('focus-area-preview-grid');
+      if (!container) return;
+      container.innerHTML = quizData.sections.map(section => {
+        const display = getFocusAreaDisplay(section.id) || { emoji: section.emoji, name: section.name, descriptor: section.name };
+        const recognition = getFocusRecognition(section.id);
+        return `
+          <div class="focus-chooser-card">
+            <div style="font-size: 24px; margin-bottom: 6px;">${display.emoji}</div>
+            <div class="focus-chooser-title">${display.name}</div>
+            <div class="focus-chooser-descriptor">${display.descriptor || section.name}</div>
+            <div class="focus-chooser-copy">${recognition ? recognition.shortLabel : ''}</div>
+            <div class="focus-chooser-conditions">Often includes ${formatRecognitionIncludes(recognition ? recognition.includes : [])}.</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderConditionRoutingList() {
+      const container = document.getElementById('issue-fit-list');
+      if (!container) return;
+      container.innerHTML = conditionRoutingMap.map(item => `
+        <div class="issue-fit-item">
+          <strong>${item.label}</strong>
+          <div class="issue-fit-route">${item.routesTo.join(' + ')}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderFocusRecognition(primaryId, isMixed) {
+      const card = document.getElementById('focus-recognition-card');
+      const title = document.getElementById('focus-recognition-title');
+      const oneLiner = document.getElementById('focus-recognition-oneliner');
+      const body = document.getElementById('focus-recognition-body');
+      const includes = document.getElementById('focus-recognition-includes');
+      const tweak = document.getElementById('focus-recognition-tweak');
+      if (!card || !title || !oneLiner || !body || !includes || !tweak) return;
+
+      const recognition = getFocusRecognition(isMixed ? 'mixed' : primaryId);
+      if (!recognition) {
+        card.style.display = 'none';
+        return;
+      }
+
+      title.textContent = recognition.shortLabel;
+      oneLiner.textContent = recognition.oneLiner;
+      body.textContent = recognition.body;
+      if (recognition.includes && recognition.includes.length > 0) {
+        includes.innerHTML = `<strong>This often includes:</strong> ${recognition.includes.join(', ')}.`;
+        includes.style.display = 'block';
+      } else {
+        includes.textContent = '';
+        includes.style.display = 'none';
+      }
+      if (recognition.tweakNote) {
+        tweak.innerHTML = `<strong>${isMixed ? 'What to do with this:' : 'Tweak to check:'}</strong> ${recognition.tweakNote}`;
+        tweak.style.display = 'block';
+      } else {
+        tweak.textContent = '';
+        tweak.style.display = 'none';
+      }
+      card.style.display = 'block';
+    }
+
+    function getLoudestSystems(scores, limit = 3, minimum = 4) {
+      if (!scores) return [];
+      return Object.entries(scores)
+        .filter(([, score]) => typeof score === 'number' && score >= minimum)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, limit)
+        .map(([id, score]) => {
+          const display = getFocusAreaDisplay(id) || { name: id };
+          return { id, score, label: display.name };
+        });
+    }
+
+    function getLoudestSystemsText(scores, limit = 3, minimum = 4) {
+      const loudest = getLoudestSystems(scores, limit, minimum);
+      if (!loudest.length) return '';
+      return loudest.map(item => `${item.label} ${item.score}/10`).join(' + ');
+    }
+
+    function getNotableSignalNotes(scores = lastScores) {
+      const notes = [];
+      const addNote = (key, title, body) => {
+        if (notes.some(note => note.key === key)) return;
+        notes.push({ key, title, body });
+      };
+
+      const constipationActive =
+        answers['belly-5'] === 1 ||
+        Number(answers['metabolism-2'] || 0) >= 1 ||
+        Number(answers['drainage-3'] || 0) >= 1;
+      if (constipationActive) {
+        addNote(
+          'constipation',
+          'Constipation / sluggish bowels',
+          'This came through in your answers even if Belly was not your main result. Sluggish bowels can sit across Belly, Metabolism, and Drainage.'
+        );
+      }
+
+      const hotFlashesActive = Number(answers['hormones-0'] || 0) >= 1;
+      const cycleHormonesActive = Number(answers['hormones-4'] || 0) >= 1;
+      const hormoneScore = scores && typeof scores.hormones === 'number' ? scores.hormones : 0;
+      if (hotFlashesActive || cycleHormonesActive || hormoneScore >= 5) {
+        addNote(
+          'hormones',
+          'Hot flashes / hormone shifts',
+          'Temperature swings, PMS, cycle shifts, or hormone-linked changes can still matter when Sleep or Stress is the best first move.'
+        );
+      }
+
+      const sleepStressActive =
+        Number(answers['sleep-2'] || 0) >= 1 ||
+        (Number(answers['sleep-0'] || 0) >= 1 && Number(answers['stress-1'] || 0) >= 1);
+      if (sleepStressActive) {
+        addNote(
+          'sleep-stress',
+          '3am waking / racing heart or mind',
+          'Waking early, waking wired, or jolting awake panicky often sits across Sleep and Stress. Start with whichever one the result names first.'
+        );
+      }
+
+      const sugarStressActive =
+        scores &&
+        typeof scores.sugar === 'number' &&
+        typeof scores.stress === 'number' &&
+        scores.sugar >= 6 &&
+        scores.stress >= 6;
+      if (sugarStressActive) {
+        addNote(
+          'sugar-stress',
+          'Blood sugar + stress loop',
+          'Crashes, coffee reliance, anxiety, and wired-but-tired days can feed each other. The quiz may call this Mixed when both are active.'
+        );
+      }
+
+      const sugarMetabolismActive =
+        scores &&
+        typeof scores.sugar === 'number' &&
+        typeof scores.metabolism === 'number' &&
+        scores.sugar >= 5 &&
+        scores.metabolism >= 5;
+      if (sugarMetabolismActive) {
+        addNote(
+          'sugar-metabolism',
+          'Sugar cravings after years of pushing harder',
+          'Crash diets, long low-carb stretches, skipped meals, and constant macro-tracking can leave Sugar and Metabolism tangled together. This is a place to rebuild steadiness, not push harder.'
+        );
+      }
+
+      if (flags.painGate) {
+        addNote(
+          'joint-pain',
+          'Joint pain / morning stiffness',
+          'This is why Nightshades appears as a check. Pain can sit across Nightshades, Drainage, and Metabolism without needing a new Focus Area.'
+        );
+      }
+
+      if (flags.histamine) {
+        addNote(
+          'reactivity',
+          'Reactivity / histamine-style days',
+          'Reacting to foods, leftovers, alcohol, smells, supplements, or the room you are in belongs with the Reactivity tweak and the Drainage/Belly terrain.'
+        );
+      }
+
+      if (flags.environment) {
+        addNote(
+          'environment',
+          'Environment load',
+          'A damp or water-damaged environment can make Drainage, Stress, Sleep, and Metabolism harder to separate. It helps explain the pile-up.'
+        );
+      }
+
+      return notes;
+    }
+
+    function renderNotableSignalNotes(scores) {
+      const card = document.getElementById('signal-notes-card');
+      const list = document.getElementById('signal-notes-list');
+      if (!card || !list) return;
+
+      const notes = getNotableSignalNotes(scores);
+      if (!notes.length) {
+        card.style.display = 'none';
+        list.innerHTML = '';
+        return;
+      }
+
+      list.innerHTML = notes.map(note => `
+        <div class="signal-note"><strong>${note.title}:</strong> ${note.body}</div>
+      `).join('');
+      card.style.display = 'block';
+    }
+
     function getResetPlanLabel() {
       return (flags && flags.deepReset === true) ? '🛡️ Deep Reset (30 days)' : '↺ Reset (14 days)';
     }
@@ -3001,12 +3492,17 @@
         ? (getFocusAreaDisplay(primaryId) || { name: primaryId })
         : { name: 'Mixed' };
       const tweakItems = getEnabledTweaksForPlan();
+      const loudestSystemsText = getLoudestSystemsText(lastScores, 3, 4);
+      const mixedExplainer = loudestSystemsText
+        ? `${START_HERE_MIXED_EXPLAINER} What scored highest today: ${loudestSystemsText}.`
+        : START_HERE_MIXED_EXPLAINER;
       return {
         introLine: isMixed ? START_HERE_MIXED_INTRO : START_HERE_SINGLE_INTRO,
         resetLabel: getResetPlanLabel(),
         laneLabel: getRecommendedCarbLaneLabel(primaryId, clarity),
         focusLabel: isMixed ? 'Mixed' : primaryDisplay.name,
-        focusExplainer: isMixed ? START_HERE_MIXED_EXPLAINER : (acknowledgement || ''),
+        focusExplainer: isMixed ? mixedExplainer : (acknowledgement || ''),
+        loudestSystemsText,
         tweaksText: tweakItems.length ? tweakItems.join(' + ') : 'None',
         nextStepText: getNextStepResetText(),
         week1Line: START_HERE_WEEK1_LINE
@@ -3015,7 +3511,7 @@
 
     const HIGHER_CANDIDATE_COPY = {
       heading: 'Higher may fit you',
-      body: 'Your answers suggest flat, cold, or under-fuel signals. If you feel better with more starch, add 1/2 cup at dinner for 2-3 days, keep added fat modest, then reassess.'
+      body: 'Your answers point to flat, cold, or under-fed days. If you feel better with more starch, add 1/2 cup at dinner for 2-3 days, keep added fat modest, then reassess.'
     };
 
     const UNDERFUEL_GUARDRAIL_COPY = 'If low carb has ever made you feel colder, flatter, or sleep worse, start your starch at dinner and increase by 1/2 cup every 2-3 days if steadier.';
@@ -3098,6 +3594,7 @@
       const focusCardHeading = document.getElementById('focus-card-heading');
       const primaryEmojiEl = document.getElementById('primary-emoji');
       const focusIntroLine = document.getElementById('focus-intro-line');
+      const focusSupportLine = document.getElementById('focus-support-line');
       const planResetLine = document.getElementById('plan-reset-line');
       const planCarbLine = document.getElementById('plan-carb-line');
       const planFocusLine = document.getElementById('plan-focus-line');
@@ -3109,6 +3606,7 @@
       if (primaryEmojiEl) primaryEmojiEl.textContent = isMixed ? '🧭' : primaryDisplay.emoji;
       const startHere = buildStartHereSummary(primaryId, clarity, isMixed, acknowledgement);
       if (focusIntroLine) focusIntroLine.textContent = startHere.introLine;
+      if (focusSupportLine) focusSupportLine.textContent = `${START_HERE_SUPPORT_LINE} ${START_HERE_OPTIONAL_SUPPORT}`;
       if (planResetLine) planResetLine.innerHTML = `<strong>Reset length:</strong> ${startHere.resetLabel}`;
       if (planCarbLine) planCarbLine.innerHTML = `<strong>Carb Lane:</strong> ${startHere.laneLabel}`;
       if (planFocusLine) planFocusLine.innerHTML = `<strong>Focus Area:</strong> ${startHere.focusLabel}`;
@@ -3123,8 +3621,10 @@
       }
       if (planTweaksLine) planTweaksLine.innerHTML = `<strong>Tweaks:</strong> ${startHere.tweaksText}`;
       if (planNextStepLine) planNextStepLine.innerHTML = `<strong>Next step:</strong> ${startHere.nextStepText}`;
+      renderFocusRecognition(primaryId, isMixed);
 
       renderFlagBadges();
+      renderNotableSignalNotes(scores);
 
       const container = document.getElementById('all-areas');
       container.innerHTML = '';
@@ -3148,6 +3648,7 @@
             </div>
           </div>
           <div class="area-descriptor">${display.descriptor || section.name}</div>
+          <div class="area-recognition"><strong>This often includes:</strong> ${formatRecognitionIncludes((getFocusRecognition(section.id) || {}).includes)}.</div>
           <div class="score-label-chip">
             <span class="score-dot" style="background:${getScoreColor(section.score)};"></span>
             ${getScoreLabel(section.score)}
@@ -3436,7 +3937,7 @@
     function copyQASummary() {
       const rows = buildQASummary();
       const lines = rows.map(row => `${row.number ? `Q${row.number} ` : ''}[${row.section}] ${row.question} — ${row.answerLabel}${row.number && row.answerValue !== '' ? ` (${row.answerValue})` : ''}`);
-      const text = lines.join('\\n');
+      const text = lines.join('\n');
       navigator.clipboard.writeText(text).then(() => {
         alert('Q&A summary copied to clipboard.');
       }).catch(() => {
@@ -3461,8 +3962,15 @@
       const bileTotal = Number(modifierAnswers.bile1 || 0) + Number(modifierAnswers.bile2 || 0) + Number(modifierAnswers.bile3 || 0);
       const histamineLabel = flags.histamine ? `ON (${flags.histamineSource || 'explicit'})` : 'OFF';
       const startHere = buildStartHereSummary(lastResult.primaryId, lastResult.clarity, lastResult.mixed, lastResult.acknowledgement);
+      const primaryRecognition = getFocusRecognition(lastResult.mixed ? 'mixed' : lastResult.primaryId);
+      const issueFitLines = conditionRoutingMap.map(item => `- ${item.label}: ${item.routesTo.join(' + ')}`);
+      const signalLines = getNotableSignalNotes(scores).map(note => `- ${note.title}: ${note.body}`);
 
       return [
+        'YOUR RESULT',
+        '- Your Terrain Reset result points to the part of the picture taking up the most room right now.',
+        '- Named issues can span more than one Focus Area. This result gives you the first place to work, not the whole story.',
+        '',
         'YOUR STARTING POINT',
         `- Name: ${userProfile.name || ''}`,
         `- Email: ${userProfile.email || ''}`,
@@ -3472,6 +3980,9 @@
         `- Carb Lane: ${startHere.laneLabel}`,
         `- Focus: ${startHere.focusLabel}`,
         ...(startHere.focusExplainer ? [`- ${startHere.focusExplainer}`] : []),
+        ...(startHere.loudestSystemsText ? [`- What scored highest today: ${startHere.loudestSystemsText}`] : []),
+        ...(primaryRecognition ? [`- ${primaryRecognition.shortLabel}`, `- ${primaryRecognition.oneLiner} ${primaryRecognition.body}`] : []),
+        ...(primaryRecognition && primaryRecognition.includes.length ? [`- This often includes: ${primaryRecognition.includes.join(', ')}`] : []),
         `- Next step: ${startHere.nextStepText}`,
         `- Tweaks: ${startHere.tweaksText}`,
         `- ${startHere.week1Line}`,
@@ -3488,6 +3999,12 @@
         `- Metabolism: ${scores.metabolism ?? ''}`,
         `- Hormones: ${scores.hormones ?? ''}`,
         `- Drainage: ${scores.drainage ?? ''}`,
+        '',
+        'WHERE YOUR ISSUE USUALLY FITS',
+        ...issueFitLines,
+        '',
+        'WORTH NOT MISSING',
+        ...(signalLines.length ? signalLines : ['- Nothing else stood out from these answers.']),
         '',
         'Q&A SUMMARY',
         ...qaLines,
@@ -3520,7 +4037,7 @@
         `- Environment flag: ${flags.environment ? 'ON' : 'OFF'}`,
         '',
         'Disclaimer: Educational only. This does not replace medical care.'
-      ].join('\\n');
+      ].join('\n');
     }
 
     function copyProtocolSummary() {
@@ -3533,21 +4050,21 @@
     }
 
     function saveAnswers() {
-      const ls = safeLocalStorage();
-      if (!ls) return;
-      ls.setItem('terrainResetAnswers', JSON.stringify(answers));
-      ls.setItem('terrainResetSection', currentSectionIndex);
       saveProgress();
     }
 
     function saveProfile() {
       const ls = safeLocalStorage();
       if (!ls) return;
-      ls.setItem(STORAGE_KEY_PROFILE, JSON.stringify({
-        userProfile: getPersistableUserProfile(),
-        safetyAnswers,
-        modifierAnswers
-      }));
+      try {
+        ls.setItem(STORAGE_KEY_PROFILE, JSON.stringify({
+          userProfile: getPersistableUserProfile(),
+          safetyAnswers,
+          modifierAnswers
+        }));
+      } catch (e) {
+        // Storage quota exceeded – profile not saved but quiz continues
+      }
     }
 
     function loadState() {
@@ -3603,8 +4120,6 @@
         safetyAnswers = { blood: false, weightLoss: false, edRisk: false, none: false };
         const ls = safeLocalStorage();
         if (ls) {
-          ls.removeItem('terrainResetAnswers');
-          ls.removeItem('terrainResetSection');
           ls.removeItem(STORAGE_KEY_PROGRESS);
         }
         hydrateSafetyInputs();
@@ -3767,7 +4282,7 @@
       );
 
       const focusLine = isMixed
-        ? 'Mixed (no single clear area for you to focus on yet. Follow Day 1 to Day 14 in order.)'
+        ? 'Mixed (more than one part of the picture is asking for attention. Start with the Foundations, then Sleep or Stress first if one of them is clearly taking over.)'
         : startHere.focusLabel;
 
       const lines = [
@@ -3776,6 +4291,16 @@
         `Focus Area: ${focusLine}`,
         `Tweaks: ${startHere.tweaksText}`
       ];
+      const recognition = getFocusRecognition(isMixed ? 'mixed' : lastResult.primaryId);
+      if (recognition) {
+        lines.push(`Lens: ${recognition.shortLabel}`);
+        if (recognition.includes.length) {
+          lines.push(`This often includes: ${recognition.includes.join(', ')}`);
+        }
+      }
+      if (startHere.loudestSystemsText) {
+        lines.push(`What scored highest today: ${startHere.loudestSystemsText}`);
+      }
 
       const startLines = [
         'Start: Go to Day 1.',
@@ -3903,6 +4428,19 @@
           <div class="qa-a">${escapeHtml(row.answerLabel)}</div>
         </div>
       `).join('');
+      const recognition = getFocusRecognition(lastResult.mixed ? 'mixed' : lastResult.primaryId);
+      const issueFitHtml = conditionRoutingMap.map(item => `
+        <div class="qa-row">
+          <div class="qa-q">${escapeHtml(item.label)}</div>
+          <div class="qa-a">${escapeHtml(item.routesTo.join(' + '))}</div>
+        </div>
+      `).join('');
+      const signalNotesHtml = getNotableSignalNotes(scores).map(note => `
+        <div class="qa-row">
+          <div class="qa-q">${escapeHtml(note.title)}</div>
+          <div class="qa-a">${escapeHtml(note.body)}</div>
+        </div>
+      `).join('');
 
       const html = `<!DOCTYPE html>
       <html lang="en"><head>
@@ -3935,6 +4473,8 @@
           <h2>Week 1 Quick Start Snapshot</h2>
           ${startHereLines}
           ${quickStart ? quickStart.startLines.map(line => `<div class="line">${escapeHtml(line)}</div>`).join('') : ''}
+          ${recognition ? `<div class="line" style="margin-top:10px;"><strong>${escapeHtml(recognition.shortLabel)}</strong></div>` : ''}
+          ${recognition && recognition.includes.length ? `<div class="line">This often includes: ${escapeHtml(recognition.includes.join(', '))}</div>` : ''}
         </div>
         <div class="section">
           <h2>Complete Focus Area Map</h2>
@@ -3947,6 +4487,14 @@
             <div>Hormones: <strong>${scores.hormones ?? ''}/10</strong></div>
             <div>Drainage: <strong>${scores.drainage ?? ''}/10</strong></div>
           </div>
+        </div>
+        <div class="section">
+          <h2>Where your issue usually fits</h2>
+          ${issueFitHtml}
+        </div>
+        <div class="section">
+          <h2>Worth Not Missing</h2>
+          ${signalNotesHtml || '<div class="muted">Nothing else stood out from these answers.</div>'}
         </div>
         <div class="section">
           <h2>Q&A Summary</h2>
